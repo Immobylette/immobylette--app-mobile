@@ -16,10 +16,8 @@ fun Title(text: String) {
     Text(
         text,
         fontSize = 20.sp,
-        fontWeight =
-        FontWeight.SemiBold,
-        color =
-        MaterialTheme.colorScheme.primary
+        fontWeight = FontWeight.SemiBold,
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
