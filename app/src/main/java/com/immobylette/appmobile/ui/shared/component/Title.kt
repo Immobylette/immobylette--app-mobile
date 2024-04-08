@@ -14,21 +14,21 @@ import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 @Composable
 fun Title(text: String) {
     Text(
-        text,
+        text = text,
         fontSize = 20.sp,
         fontWeight = FontWeight.SemiBold,
-        color = MaterialTheme.colorScheme.primary
+        color = MaterialTheme.colorScheme.primary,
+        fontFamily = MaterialTheme.typography.headlineMedium.fontFamily
     )
 }
 
 @Preview(showBackground=true)
 @Composable
 fun TitlePreview(){
-    ImmobyletteappmobileTheme {
+    ImmobyletteappmobileTheme(darkTheme = false, dynamicColor = false) {
         Surface(Modifier.fillMaxSize()) {
             Title("Sélectionner un agent")
         }
-
     }
 }
 
