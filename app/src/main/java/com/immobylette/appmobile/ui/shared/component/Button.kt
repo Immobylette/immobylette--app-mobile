@@ -18,10 +18,11 @@ import com.immobylette.appmobile.ui.shared.theme.Pink
 
 
 @Composable
-fun AppButton(
+fun Button(
     modifier: Modifier = Modifier,
     text: String = "Suivant",
     isOnLeftSide: Boolean = true,
+    hasTwoRoundedCorners: Boolean = false,
     onClick: () -> Unit
 ) {
     Button(
@@ -29,7 +30,9 @@ fun AppButton(
         shape =
             RoundedCornerShape(
                 topEnd = if (isOnLeftSide) LocalBorderRadius.current else 0.dp,
-                topStart = if (!isOnLeftSide) LocalBorderRadius.current else 0.dp
+                bottomStart = if (isOnLeftSide && hasTwoRoundedCorners) LocalBorderRadius.current else 0.dp,
+                topStart = if (!isOnLeftSide) LocalBorderRadius.current else 0.dp,
+                bottomEnd = if (!isOnLeftSide && hasTwoRoundedCorners) LocalBorderRadius.current else 0.dp
             ),
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         modifier = modifier,
@@ -42,10 +45,6 @@ fun AppButton(
     }
 }
 
-fun ExempleCallback(){
-    println("Clic bouton Suivant")
-}
-
 @Preview(showBackground=true)
 @Composable
 fun AppButtonPreview(){
@@ -54,7 +53,7 @@ fun AppButtonPreview(){
         dynamicColor = false,
     ) {
         Surface() {
-            AppButton(onClick = { ExempleCallback() }, isOnLeftSide = false)
+            Button(onClick = { println("Clic bouton Suivant") }, isOnLeftSide = false)
         }
     }
 }

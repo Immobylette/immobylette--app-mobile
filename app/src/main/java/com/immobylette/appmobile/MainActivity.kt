@@ -6,16 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.immobylette.appmobile.ui.shared.component.AppButton
+import com.immobylette.appmobile.ui.shared.component.Button
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.ui.shared.theme.LocalAppButtonWidth
 
@@ -31,9 +32,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Greeting("Android")
                     Box(
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier
+                            .fillMaxSize()
                     ) {
-                        AppButton(
+                        Button(
                             text = "Quitter",
                             onClick = { println("Clic bouton Quitter")},
                             modifier = Modifier
@@ -41,7 +43,7 @@ class MainActivity : ComponentActivity() {
                                 .width(LocalAppButtonWidth.current)
                         )
 
-                        AppButton(
+                        Button(
                             text = "Suivant",
                             onClick = { println("Clic bouton Suivant")},
                             isOnLeftSide = false,
