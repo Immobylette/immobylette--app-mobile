@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.immobylette.appmobile.ui.shared.component.GraphicFooter
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GraphicFooter()
+                    Greeting("Android")
                 }
             }
         }

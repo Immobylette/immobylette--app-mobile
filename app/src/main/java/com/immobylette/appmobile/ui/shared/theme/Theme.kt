@@ -23,13 +23,13 @@ import androidx.compose.ui.text.TextStyle
 
 private val DarkColorScheme = darkColorScheme(
     primary = Pink,
-    secondary = Blue,
+    secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Pink,
-    secondary = Blue,
+    secondary = PurpleGrey40,
     tertiary = Pink40
 )
 
