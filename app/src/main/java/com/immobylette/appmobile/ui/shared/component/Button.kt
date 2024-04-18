@@ -12,10 +12,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
-import com.immobylette.appmobile.ui.shared.theme.LocalBorderRadius
-import com.immobylette.appmobile.ui.shared.theme.LocalFontSize
-import com.immobylette.appmobile.ui.shared.theme.Pink
 
+val borderRadius = 20.dp
+val appButtonWidth = 200.dp
+val fontSize = 20.sp
 
 @Composable
 fun Button(
@@ -29,10 +29,10 @@ fun Button(
         onClick = onClick,
         shape =
             RoundedCornerShape(
-                topEnd = if (isOnLeftSide) LocalBorderRadius.current else 0.dp,
-                bottomStart = if (isOnLeftSide && hasTwoRoundedCorners) LocalBorderRadius.current else 0.dp,
-                topStart = if (!isOnLeftSide) LocalBorderRadius.current else 0.dp,
-                bottomEnd = if (!isOnLeftSide && hasTwoRoundedCorners) LocalBorderRadius.current else 0.dp
+                topEnd = if (isOnLeftSide) borderRadius else 0.dp,
+                bottomStart = if (isOnLeftSide && hasTwoRoundedCorners) borderRadius else 0.dp,
+                topStart = if (!isOnLeftSide) borderRadius else 0.dp,
+                bottomEnd = if (!isOnLeftSide && hasTwoRoundedCorners) borderRadius else 0.dp
             ),
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         modifier = modifier,
@@ -40,7 +40,7 @@ fun Button(
         Text(
             text = text,
             fontFamily = MaterialTheme.typography.headlineMedium.fontFamily,
-            fontSize = LocalFontSize.current,
+            fontSize = fontSize,
         )
     }
 }

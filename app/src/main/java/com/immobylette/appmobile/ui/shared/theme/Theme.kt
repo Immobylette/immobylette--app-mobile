@@ -10,22 +10,16 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.core.view.WindowCompat
 import com.immobylette.appmobile.R
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
 
 private val DarkColorScheme = darkColorScheme(
     primary = Pink,
@@ -39,19 +33,10 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Pink40
 )
 
-val LocalBorderRadius = compositionLocalOf { 0.dp }
-
-val LocalAppButtonWidth = compositionLocalOf { 0.dp }
-
-val LocalFontSize = compositionLocalOf { 0.sp }
-
 @Composable
 fun ImmobyletteappmobileTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
-    borderRadius: Dp = 20.dp,
-    appButtonWidth: Dp = 200.dp,
-    fontSize: TextUnit = 20.sp,
     content: @Composable () -> Unit,
 ) {
 
@@ -87,15 +72,9 @@ fun ImmobyletteappmobileTheme(
         }
     }
 
-    CompositionLocalProvider(
-        LocalBorderRadius provides borderRadius,
-        LocalAppButtonWidth provides appButtonWidth,
-        LocalFontSize provides fontSize
-    ) {
-        MaterialTheme(
-            colorScheme = colorScheme,
-            typography = typography,
-            content = content,
-        )
-    }
+    MaterialTheme(
+        colorScheme = colorScheme,
+        typography = typography,
+        content = content,
+    )
 }
