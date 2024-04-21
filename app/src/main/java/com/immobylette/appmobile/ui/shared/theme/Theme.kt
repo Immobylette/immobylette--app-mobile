@@ -37,7 +37,7 @@ private val LightColorScheme = lightColorScheme(
 fun ImmobyletteappmobileTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
 
     val provider = GoogleFont.Provider(
