@@ -1,6 +1,5 @@
 package com.immobylette.appmobile.ui.shared.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -20,13 +19,17 @@ val fredokaFontFamily = FontFamily(
     Font(googleFont = GoogleFont("Fredoka"), fontProvider = provider)
 )
 
+val interFontFamily = FontFamily(
+    Font(googleFont = GoogleFont("Inter"), fontProvider = provider)
+)
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     headlineMedium = TextStyle(fontFamily = fredokaFontFamily),
     bodyMedium = TextStyle(
         fontFamily = fredokaFontFamily,
         fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
+        fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp,
         color = Black
@@ -45,6 +48,9 @@ val Typography = Typography(
         fontWeight = FontWeight.SemiBold,
         color = Pink
     ),
+    displayMedium = TextStyle(
+        fontFamily = interFontFamily
+    )
     /* Other default text styles to override
     titleLarge = TextStyle(
         fontFamily = FontFamily.Default,

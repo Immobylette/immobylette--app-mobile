@@ -50,6 +50,10 @@ fun ImmobyletteappmobileTheme(
         Font(googleFont = GoogleFont("Fredoka"), fontProvider = provider)
     )
 
+    val interFontFamily = FontFamily(
+        Font(googleFont = GoogleFont("Inter"), fontProvider = provider)
+    )
+
     val typography = Typography
 
     val colorScheme = when {

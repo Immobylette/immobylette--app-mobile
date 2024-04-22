@@ -15,3 +15,5 @@ var Black = Color(0xFF363636)
 var Background = Color(0xFFF1F1F1)
 
 val Blue = Color(0xFF1EC5CC)
+
+var Grey = Color(0xFF818181)
