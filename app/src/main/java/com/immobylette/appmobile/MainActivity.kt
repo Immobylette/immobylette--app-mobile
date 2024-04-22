@@ -3,47 +3,32 @@ package com.immobylette.appmobile
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.immobylette.appmobile.ui.shared.component.GraphicFooter
+import androidx.activity.viewModels
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
+import com.immobylette.appmobile.agent.selection.agentSelectionNaivgation
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ImmobyletteappmobileTheme() {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    GraphicFooter()
+            val agentSelectionViewModel by viewModels<AgentSelectionViewModel>()
+            val navController = rememberNavController()
+
+            ImmobyletteappmobileTheme {
+                NavHost(
+                    navController = navController,
+                    startDestination = "agent-selection",
+                ){
+                    agentSelectionNaivgation(
+                        agentSelectionViewModel = agentSelectionViewModel,
+                        //TODO: Modify the callback to navigate to the next screen
+                        onNavigateToAgentSelected = { navController.navigate("") }
+                    )
                 }
             }
         }
-    }
-}
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ImmobyletteappmobileTheme {
-        Greeting("Android")
     }
 }
