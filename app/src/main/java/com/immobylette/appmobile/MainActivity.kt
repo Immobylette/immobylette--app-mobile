@@ -13,9 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.immobylette.appmobile.ui.shared.component.Button
-import com.immobylette.appmobile.ui.shared.component.appButtonWidth
+import com.immobylette.appmobile.ui.shared.component.GraphicFooter
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,34 +26,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    ) {
-                        Button(
-                            text = "Quitter",
-                            onClick = { println("Clic bouton Quitter")},
-                            modifier = Modifier
-                                .align(Alignment.BottomStart)
-                                .width(appButtonWidth)
-                        )
-
-                        Button(
-                            text = "Suivant",
-                            onClick = { println("Clic bouton Suivant")},
-                            isOnLeftSide = false,
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .width(appButtonWidth)
-                        )
-                    }
-
+                    GraphicFooter()
                 }
             }
         }
     }
 }
-
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
