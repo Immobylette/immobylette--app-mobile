@@ -37,7 +37,7 @@ private val LightColorScheme = lightColorScheme(
 fun ImmobyletteappmobileTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
 
     val provider = GoogleFont.Provider(
@@ -50,8 +50,13 @@ fun ImmobyletteappmobileTheme(
         Font(googleFont = GoogleFont("Fredoka"), fontProvider = provider)
     )
 
+    val interFontFamily = FontFamily(
+        Font(googleFont = GoogleFont("Inter"), fontProvider = provider)
+    )
+
     val typography = Typography(
-        headlineMedium = TextStyle(fontFamily = fredokaFontFamily)
+        headlineMedium = TextStyle(fontFamily = fredokaFontFamily),
+        displayMedium = TextStyle(fontFamily = interFontFamily),
     )
 
     val colorScheme = when {
