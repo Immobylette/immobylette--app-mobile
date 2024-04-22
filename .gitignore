@@ -38,6 +38,11 @@ app/build/
 .idea/navEditor.xml
 .idea/sonarlint
 .idea/inspectionProfiles
+.idea/codeStyles
+.idea/deploymentTargetDropDown.xml
+.idea/misc.xml
+.idea/modules/
+.idea/immobylette--app-mobile.iml
 .gradle/
 local.properties
 
