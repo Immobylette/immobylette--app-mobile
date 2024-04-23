@@ -88,6 +88,7 @@ fun PropertyCard(
                     .fillMaxWidth(0.65f)
                     .height(8.dp)
                     .clip(RectangleShape)
+                    .zIndex(3f)
                     .background(Pink)
             )
             Row(
