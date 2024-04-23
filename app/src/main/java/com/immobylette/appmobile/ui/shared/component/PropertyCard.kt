@@ -1,8 +1,6 @@
 package com.example.testappkotlin.ui.shared.component
 
-import android.media.Image
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,7 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -57,13 +54,13 @@ import java.net.URL
 @Composable
 fun PropertyCard(
     address: String,
-    nb_rooms: Int,
-    property_type: String,
-    property_class: String,
+    nbRooms: Int,
+    propertyType: String,
+    propertyClass: String,
     owner: String,
-    photo_url: URL,
+    photoUrl: URL,
     distance: Float,
-    in_progress: Boolean,
+    inProgress: Boolean,
     modifier: Modifier = Modifier,
     onClickButton: () -> Unit = {}
 ) {
@@ -102,7 +99,7 @@ fun PropertyCard(
                 Column (
                 ) {
                     Image(
-                        painter = rememberAsyncImagePainter(photo_url.toString()),
+                        painter = rememberAsyncImagePainter(photoUrl.toString()),
                         contentScale = ContentScale.Crop,
                         contentDescription = address,
                         modifier = Modifier
@@ -120,7 +117,7 @@ fun PropertyCard(
                         .fillMaxHeight()
                         .padding(top = 33.dp, bottom = 45.dp)
                 ) {
-                    if(in_progress) {
+                    if(inProgress) {
                         Text(
                             text = stringResource(id = R.string.label_in_progress),
                             style = MaterialTheme.typography.headlineSmall,
@@ -164,7 +161,7 @@ fun PropertyCard(
                     ) {
                         PropertyInfo(
                             icon = Icons.Rounded.Info,
-                            text = "$property_type, $property_class, $nb_rooms chambre(s)")
+                            text = "$propertyType, $propertyClass, $nbRooms chambre(s)")
                     }
                     Row (
                         verticalAlignment = Alignment.CenterVertically
@@ -240,13 +237,13 @@ fun PropertyCardPreview(){
                 Column {
                     PropertyCard(
                         address = "18 Rue Jean Souvraz",
-                        nb_rooms = 3,
-                        property_type = "Appartment",
-                        property_class = "T1",
+                        nbRooms = 3,
+                        propertyType = "Appartment",
+                        propertyClass = "T1",
                         owner = "Pol Neutron",
-                        photo_url = URL("https://fr.web.img4.acsta.net/r_1920_1080/medias/nmedia/18/74/23/35/20142770.jpg"),
+                        photoUrl = URL("https://fr.web.img4.acsta.net/r_1920_1080/medias/nmedia/18/74/23/35/20142770.jpg"),
                         distance = 542f,
-                        in_progress = false,
+                        inProgress = false,
                         modifier = Modifier
                             .padding(16.dp)
                             .fillMaxWidth(),
@@ -254,13 +251,13 @@ fun PropertyCardPreview(){
                     )
                     PropertyCard(
                         address = "7 rue angela davis, Lens",
-                        nb_rooms = 3,
-                        property_type = "Appartment",
-                        property_class = "T1",
+                        nbRooms = 3,
+                        propertyType = "Appartment",
+                        propertyClass = "T1",
                         owner = "Pol Neutron",
-                        photo_url = URL("https://www.shutterstock.com/image-photo/living-room-couches-chairs-coffee-600nw-2290619915.jpg"),
+                        photoUrl = URL("https://www.shutterstock.com/image-photo/living-room-couches-chairs-coffee-600nw-2290619915.jpg"),
                         distance = 5524f,
-                        in_progress = true,
+                        inProgress = true,
                         modifier = Modifier
                             .padding(16.dp)
                             .fillMaxWidth(),
