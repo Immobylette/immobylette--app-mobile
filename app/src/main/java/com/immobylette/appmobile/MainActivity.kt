@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
-import com.immobylette.appmobile.agent.selection.agentSelectionNaivgation
+import com.immobylette.appmobile.agent.selection.agentSelectionNavigation
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     startDestination = "agent-selection",
                 ){
-                    agentSelectionNaivgation(
+                    agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
                         //TODO: Modify the callback to navigate to the next screen
                         onNavigateToAgentSelected = { navController.navigate("") }

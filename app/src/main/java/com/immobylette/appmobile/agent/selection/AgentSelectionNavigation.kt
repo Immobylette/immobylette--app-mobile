@@ -7,7 +7,7 @@ import com.immobylette.appmobile.ui.shared.component.GraphicFooter
 
 const val agentSelectionRoute = "agent-selection"
 
-fun NavGraphBuilder.agentSelectionNaivgation(
+fun NavGraphBuilder.agentSelectionNavigation(
     agentSelectionViewModel: AgentSelectionViewModel,
     onNavigateToAgentSelected: () -> Unit,
 ) {
