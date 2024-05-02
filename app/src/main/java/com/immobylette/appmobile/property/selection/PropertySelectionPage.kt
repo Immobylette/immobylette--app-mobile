@@ -36,7 +36,7 @@ fun PropertySelectionPage (
     state: PropertyListState,
     fetchPropertyList: () -> Unit,
     fetchProperty: (UUID) -> Unit,
-    saveCurrentProperty: (PropertyState) -> Unit,
+    saveCurrentProperty: (UUID) -> Unit,
     onNavigateToChangeAgent: () -> Unit,
     onNavigateToPropertySelected: () -> Unit
 ) {
@@ -113,7 +113,7 @@ fun PropertySelectionPage (
                             fetchProperty(property.id)
                         },
                     ) {
-                        saveCurrentProperty(property)
+                        saveCurrentProperty(property.id)
                         onNavigateToPropertySelected()
                     }
                     Spacer(modifier = Modifier.height(30.dp))

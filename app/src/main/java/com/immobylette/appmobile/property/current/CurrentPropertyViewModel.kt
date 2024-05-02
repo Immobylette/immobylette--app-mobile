@@ -1,17 +1,15 @@
 package com.immobylette.appmobile.property.current
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
-import com.immobylette.appmobile.property.selection.PropertyState
+import java.util.UUID
 
 class CurrentPropertyViewModel: ViewModel() {
-    private val _currentProperty = mutableStateOf(PropertyState())
-    val currentProperty: State<PropertyState> get() = _currentProperty
+    private val _currentProperty = mutableStateOf(UUID.randomUUID())
+    val currentProperty: State<UUID> get() = _currentProperty
 
-    fun changeCurrentProperty(property: PropertyState) {
-        Log.d("CurrentPropertyViewModel", "changeCurrentProperty: $property")
+    fun changeCurrentProperty(property: UUID) {
         _currentProperty.value = property
     }
 }
