@@ -3,4 +3,5 @@
     <string name="label_select_agent">Sélectionner un agent</string>
     <string name="label_in_progress">En cours</string>
     <string name="label_button_inventory">État des lieux</string>
+    <string name="label_button_change_agent">Changer d\'agent</string>
 </resources>

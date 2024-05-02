@@ -1,4 +1,4 @@
-package com.example.testappkotlin.ui.shared.component
+package com.immobylette.appmobile.ui.shared.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -62,6 +62,7 @@ fun PropertyCard(
     distance: Float,
     inProgress: Boolean,
     modifier: Modifier = Modifier,
+    onExpanded: () -> Unit = {},
     onClickButton: () -> Unit = {}
 ) {
     var tapped by remember { mutableStateOf(false) }
@@ -78,7 +79,10 @@ fun PropertyCard(
                 .wrapContentSize()
                 .shadow(if (tapped) 2.dp else 0.dp)
                 .zIndex(2f)
-                .clickable { tapped = !tapped },
+                .clickable {
+                    tapped = !tapped
+                    if (tapped) onExpanded()
+               },
         ) {
             Box(
                 Modifier

@@ -45,6 +45,7 @@ app/build/
 .idea/immobylette--app-mobile.iml
 .gradle/
 local.properties
+api.properties
 
 bin/
 gen/
