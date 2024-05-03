@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
 import com.immobylette.appmobile.agent.selection.agentSelectionNavigation
+import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
 import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
 import com.immobylette.appmobile.property.selection.navigateToConfirmationOfAttendance
@@ -35,7 +36,11 @@ class MainActivity : ComponentActivity() {
                 ){
                     agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
-                        onNavigateToAgentSelected = { navController.navigate("property-selection") }
+                        onNavigateToAgentSelected = { navController.navigate("loading") }
+                    )
+
+                    loadingNavigation(
+                        onNavigateToLoadingFinished = { navController.navigate("property-selection") }
                     )
 
                     propertySelectionNavigation(
