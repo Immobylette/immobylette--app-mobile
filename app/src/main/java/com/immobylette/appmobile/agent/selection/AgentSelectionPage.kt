@@ -85,7 +85,7 @@ fun AgentRow(
         items(agentList) { agent: AgentState ->
             Agent(
                 url = agent.photo,
-                name = agent.surname,
+                name = agent.name,
                 modifier = Modifier.padding(30.dp).width(150.dp).height(agentListHeight.dp),
                 onClick = {
                     setCurrentAgent(agent.id)
