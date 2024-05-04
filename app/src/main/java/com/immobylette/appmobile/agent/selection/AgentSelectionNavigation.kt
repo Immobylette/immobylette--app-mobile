@@ -1,37 +1,30 @@
 package com.immobylette.appmobile.agent.selection
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.immobylette.appmobile.ui.shared.component.GraphicFooter
-import com.immobylette.appmobile.ui.shared.component.Logo
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
 
 const val agentSelectionRoute = "agent-selection"
 
 fun NavGraphBuilder.agentSelectionNavigation(
     agentSelectionViewModel: AgentSelectionViewModel,
+    currentAgentViewModel: CurrentAgentViewModel,
     onNavigateToAgentSelected: () -> Unit,
 ) {
-
     composable(agentSelectionRoute) {
-        // Get the state from viewModel
-
-        // Place the page below
-        Surface {
-            //GraphicFooter()
-            Box(
-                contentAlignment = Alignment.Center, // Centre le contenu à l'intérieur de la Box
-                modifier = Modifier.fillMaxSize() // La Box remplit toute la taille de l'écran
-            ) {
-                Logo();
-            }
-
-        }
+        val state: AgentListState by agentSelectionViewModel.state.collectAsStateWithLifecycle()
+        AgentSelectionPage(
+            state = state,
+            fetchAgentList = agentSelectionViewModel::fetchAgentList,
+            setCurrentAgent = currentAgentViewModel::setCurrentAgent,
+            onNavigateToAgentSelected = onNavigateToAgentSelected
+        )
     }
 }
 
-// Place navigation functions below
+fun NavController.navigateToAgentSelection() {
+    navigate(agentSelectionRoute)
+}

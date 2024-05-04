@@ -1,6 +1,7 @@
 package com.immobylette.appmobile.utils
 
 import com.immobylette.appmobile.data.service.PropertyService
+import com.immobylette.appmobile.data.service.AgentService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,4 +15,5 @@ object RetrofitHelper {
         .build()
 
     val propertyService: PropertyService = retrofitClient.create(PropertyService::class.java)
+    val agentService: AgentService = retrofitClient.create(AgentService::class.java)
 }
