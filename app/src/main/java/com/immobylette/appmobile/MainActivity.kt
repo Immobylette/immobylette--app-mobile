@@ -8,13 +8,24 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
 import com.immobylette.appmobile.agent.selection.agentSelectionNavigation
+import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
+import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
+import com.immobylette.appmobile.property.selection.navigateToConfirmationOfAttendance
+import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
+import com.immobylette.appmobile.utils.LocationHelper
 
 class MainActivity : ComponentActivity() {
+    private val currentPropertyViewModel by viewModels<CurrentPropertyViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        LocationHelper.init(this)
+
         super.onCreate(savedInstanceState)
         setContent {
             val agentSelectionViewModel by viewModels<AgentSelectionViewModel>()
+            val propertySelectionViewModel by viewModels<PropertySelectionViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -24,8 +35,14 @@ class MainActivity : ComponentActivity() {
                 ){
                     agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
-                        //TODO: Modify the callback to navigate to the next screen
-                        onNavigateToAgentSelected = { navController.navigate("") }
+                        onNavigateToAgentSelected = { navController.navigate("property-selection") }
+                    )
+
+                    propertySelectionNavigation(
+                        propertySelectionViewModel = propertySelectionViewModel,
+                        currentPropertyViewModel = currentPropertyViewModel,
+                        onNavigateToChangeAgent = { navController.navigateUp() },
+                        onNavigateToPropertySelected = { navController::navigateToConfirmationOfAttendance }
                     )
                 }
             }

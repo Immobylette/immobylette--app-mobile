@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -18,6 +20,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val keystoreFile = project.rootProject.file("api.properties")
+        val properties = Properties()
+        properties.load(keystoreFile.inputStream())
+
+        buildConfigField("String", "API_URL", "\"${properties.getProperty("API_URL")}\"")
     }
 
     buildTypes {
@@ -29,6 +37,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -51,6 +64,10 @@ android {
 
 dependencies {
 
+    implementation(libs.accompanist.permissions)
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
     implementation(libs.coil.compose)
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.core.ktx)
@@ -62,6 +79,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
