@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
 import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
 import com.immobylette.appmobile.agent.selection.agentSelectionNavigation
 import com.immobylette.appmobile.loading.loadingNavigation
@@ -18,6 +19,8 @@ import com.immobylette.appmobile.utils.LocationHelper
 
 class MainActivity : ComponentActivity() {
     private val currentPropertyViewModel by viewModels<CurrentPropertyViewModel>()
+
+    private val currentAgentViewModel by viewModels<CurrentAgentViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,6 +39,7 @@ class MainActivity : ComponentActivity() {
                 ){
                     agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
+                        currentAgentViewModel = currentAgentViewModel,
                         onNavigateToAgentSelected = { navController.navigate("loading") }
                     )
 
