@@ -20,7 +20,7 @@ fun Title(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         modifier = modifier,
-        fontSize = 20.sp,
+        fontSize = 30.sp,
         fontWeight = FontWeight.SemiBold,
         color = MaterialTheme.colorScheme.primary,
         fontFamily = MaterialTheme.typography.headlineMedium.fontFamily

@@ -40,16 +40,16 @@ fun Agent(
             painter = rememberAsyncImagePainter(url.toString()),
             contentScale = ContentScale.Crop,
             contentDescription = name,
-            modifier = modifier
+            modifier = Modifier
                 .clip(CircleShape)
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .clickable(onClick = onClick)
         )
-        Spacer(modifier.height(8.dp))
+        Spacer(Modifier.height(8.dp))
         Text(
             text = name,
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             textAlign = TextAlign.Center,
             fontFamily = MaterialTheme.typography.displayMedium.fontFamily,
             fontWeight = FontWeight(1),
