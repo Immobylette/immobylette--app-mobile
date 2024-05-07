@@ -1,5 +1,6 @@
 package com.immobylette.appmobile.loading
 
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 
@@ -14,4 +15,8 @@ fun NavGraphBuilder.loadingNavigation(
             onNavigateToLoadingFinished = onNavigateToLoadingFinished
         )
     }
+}
+
+fun NavController.navigateToLoadingPage(){
+    navigate(loadingRoute)
 }

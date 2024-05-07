@@ -33,6 +33,10 @@ fun NavGraphBuilder.propertySelectionNavigation(
     }
 }
 
+fun NavController.navigateToPropertySelection(){
+    navigate(propertySelectionRoute)
+}
+
 fun NavController.navigateToConfirmationOfAttendance() {
     //TODO: Navigate to the confirmation of attendance screen
 }

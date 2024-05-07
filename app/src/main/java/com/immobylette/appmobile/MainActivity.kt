@@ -9,10 +9,13 @@ import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
 import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
 import com.immobylette.appmobile.agent.selection.agentSelectionNavigation
+import com.immobylette.appmobile.agent.selection.navigateToAgentSelection
 import com.immobylette.appmobile.loading.loadingNavigation
+import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
 import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
 import com.immobylette.appmobile.property.selection.navigateToConfirmationOfAttendance
+import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
@@ -40,18 +43,18 @@ class MainActivity : ComponentActivity() {
                     agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
                         currentAgentViewModel = currentAgentViewModel,
-                        onNavigateToAgentSelected = { navController.navigate("loading") }
+                        onNavigateToAgentSelected = navController::navigateToLoadingPage
                     )
 
                     loadingNavigation(
-                        onNavigateToLoadingFinished = { navController.navigate("property-selection") }
+                        onNavigateToLoadingFinished = navController::navigateToPropertySelection
                     )
 
                     propertySelectionNavigation(
                         propertySelectionViewModel = propertySelectionViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
-                        onNavigateToChangeAgent = { navController.navigateUp() },
-                        onNavigateToPropertySelected = { navController::navigateToConfirmationOfAttendance }
+                        onNavigateToChangeAgent = navController::navigateToAgentSelection,
+                        onNavigateToPropertySelected = navController::navigateToConfirmationOfAttendance
                     )
                 }
             }
