@@ -75,10 +75,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Get branch names.
-        id: branch-names
-        uses: tj-actions/branch-names@v8
-
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
@@ -109,7 +105,7 @@ jobs:
       - name: Get prefix
         id: get_prefix
         run: |
-          prefix=$(echo "${{ steps.source_branch.outputs.branch }}" | cut -d'/' -f 1)")
+          prefix=$(echo "${{ github.event.head_commit.message }}" | cut -d'/' -f 1)")
           echo "Prefix: $prefix"
           echo "prefix=$prefix" >> "$GITHUB_OUTPUT"
 
