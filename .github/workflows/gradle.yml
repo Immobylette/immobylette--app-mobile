@@ -26,8 +26,8 @@ jobs:
 
       - name: "Add signing key"
         run: |
-          echo ${{ secrets.KEYSTORE }} | base64 -d > my-release-key.jks
-          echo ${{ secrets.KEYSTORE_PROPERTIES }} > keystore.properties
+          echo "${{ secrets.KEYSTORE }}" | base64 -d > my-release-key.jks
+          echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties
 
       - name: "Build with Gradle"
         run: ./gradlew clean assembleDebug
