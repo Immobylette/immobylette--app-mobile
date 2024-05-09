@@ -96,12 +96,6 @@ jobs:
       - name: "Build with Gradle"
         run: ./gradlew clean assembleRelease
 
-      - name: Extract source branch name
-        id: source_branch
-        run: |
-          branch=$(git rev-parse --abbrev-ref HEAD)
-          echo "branch=$branch" >> "$GITHUB_OUTPUT"
-
       - name: Get prefix
         id: get_prefix
         run: |
