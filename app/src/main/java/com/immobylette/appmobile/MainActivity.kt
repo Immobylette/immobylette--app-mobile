@@ -10,6 +10,7 @@ import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
 import com.immobylette.appmobile.agent.selection.AgentSelectionViewModel
 import com.immobylette.appmobile.agent.selection.agentSelectionNavigation
 import com.immobylette.appmobile.agent.selection.navigateToAgentSelection
+import com.immobylette.appmobile.confirmation.ConfirmationViewModel
 import com.immobylette.appmobile.confirmation.confirmationNavigation
 import com.immobylette.appmobile.confirmation.navigateToConfirmation
 import com.immobylette.appmobile.loading.loadingNavigation
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val agentSelectionViewModel by viewModels<AgentSelectionViewModel>()
             val propertySelectionViewModel by viewModels<PropertySelectionViewModel>()
+            val confirmationViewModel by viewModels<ConfirmationViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -59,6 +61,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                     confirmationNavigation(
+                        confirmationViewModel = confirmationViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
                         onNavigateToConfirmed = {}
                     )
