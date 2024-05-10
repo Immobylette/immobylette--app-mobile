@@ -36,7 +36,7 @@ fun PropertySelectionPage (
     state: PropertyListState,
     fetchPropertyList: () -> Unit,
     fetchProperty: (UUID) -> Unit,
-    saveCurrentProperty: (UUID) -> Unit,
+    saveCurrentProperty: (PropertyState) -> Unit,
     onNavigateToChangeAgent: () -> Unit,
     onNavigateToPropertySelected: () -> Unit
 ) {
@@ -81,8 +81,6 @@ fun PropertySelectionPage (
         }
     }
 
-    //FIXME: Il ne reste plus qu'à trouver un moyen pour fixer le boutton en bas à gauche
-
     Scaffold(
         bottomBar = {
             Button(
@@ -113,7 +111,7 @@ fun PropertySelectionPage (
                             fetchProperty(property.id)
                         },
                     ) {
-                        saveCurrentProperty(property.id)
+                        saveCurrentProperty(property)
                         onNavigateToPropertySelected()
                     }
                     Spacer(modifier = Modifier.height(30.dp))

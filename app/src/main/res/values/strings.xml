@@ -4,4 +4,9 @@
     <string name="label_in_progress">En cours</string>
     <string name="label_button_inventory">État des lieux</string>
     <string name="label_button_change_agent">Changer d\'agent</string>
+    <string name="label_confirmation_of_attendance">Confirmation de présence</string>
+    <string name="label_denomination">Madame / Monsieur</string>
+    <string name="label_confirmation_message">Pouvez-vous confirmer votre présence svp ?</string>
+    <string name="label_button_quit">Quitter</string>
+    <string name="label_button_confirm">Confirmer</string>
 </resources>
