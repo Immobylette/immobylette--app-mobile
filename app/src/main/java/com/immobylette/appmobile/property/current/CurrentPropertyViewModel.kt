@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 import com.immobylette.appmobile.property.selection.PropertyState
+import java.util.UUID
 
 class CurrentPropertyViewModel: ViewModel() {
     private val _currentProperty = mutableStateOf(PropertyState())
@@ -15,5 +16,9 @@ class CurrentPropertyViewModel: ViewModel() {
 
     fun getTenant(): String? {
         return _currentProperty.value.currentTenant;
+    }
+
+    fun getId(): UUID {
+        return _currentProperty.value.id;
     }
 }

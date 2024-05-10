@@ -1,6 +1,6 @@
 package com.immobylette.appmobile.property.selection
 
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.immobylette.appmobile.utils.LocationHelper
@@ -43,7 +43,7 @@ class PropertySelectionViewModel: ViewModel() {
                     )
                 }
             }else{
-                Toast.makeText(null, "Error fetching properties", Toast.LENGTH_SHORT).show()
+                Log.e("RequestError", "Error fetching properties")
             }
         }
     }
@@ -76,6 +76,8 @@ class PropertySelectionViewModel: ViewModel() {
                         }
                     )
                 }
+            }else{
+                Log.e("RequestError", "Error fetching property")
             }
         }
     }

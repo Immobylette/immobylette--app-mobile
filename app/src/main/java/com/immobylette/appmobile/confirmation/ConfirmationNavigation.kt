@@ -8,12 +8,17 @@ import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
 const val confirmationRoute = "confirmation"
 
 fun NavGraphBuilder.confirmationNavigation(
+    confirmationViewModel: ConfirmationViewModel,
     currentPropertyViewModel: CurrentPropertyViewModel,
     onNavigateToConfirmed: () -> Unit,
 ) {
     composable(confirmationRoute) {
         ConfirmationPage (
-            onNavigateToConfirmed = onNavigateToConfirmed,
+            onNavigateToConfirmed = {
+                val propertyId = currentPropertyViewModel.getId()
+                confirmationViewModel.startInventory(propertyId)
+                onNavigateToConfirmed()
+            },
             getTenant = currentPropertyViewModel::getTenant
         )
     }
