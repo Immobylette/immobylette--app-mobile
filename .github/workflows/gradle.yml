@@ -1,0 +1,156 @@
+name: CI/CD Immobylette App Mobile
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    name: Build Snapshot and Push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || !(github.ref == 'refs/heads/main')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get branch names.
+        id: branch-names
+        uses: tj-actions/branch-names@v8
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: "Setup Gradle"
+        uses: gradle/gradle-build-action@v2
+
+      - name: "Add signing key"
+        run: |
+          echo "${{ secrets.KEYSTORE }}" | base64 -d > my-release-key.jks
+          echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties
+
+      - name: "Add api properties"
+        run: |
+          echo "${{ secrets.API_PROPERTIES }}" > api.properties
+
+      - name: "Build with Gradle"
+        run: ./gradlew clean assembleDebug
+
+      - name: Format apk name
+        id: format-apk-name
+        run: |
+          echo "Running on pr: ${{ steps.branch-names.outputs.current_branch }}"
+          BRANCH_FORMATTED=$(echo "${{ steps.branch-names.outputs.current_branch }}" | sed 's/[^a-zA-Z0-9]/-/g' | tr '[:upper:]' '[:lower:]')
+          echo "Branch : ${BRANCH_FORMATTED}" 
+          echo "TAG_NAME=$BRANCH_FORMATTED" >> "$GITHUB_OUTPUT"
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          export_default_credentials: true
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Push Release
+        env:
+          tag_name: ${{ steps.format-apk-name.outputs.TAG_NAME }}
+          bucket_name: ${{ secrets.GCP_APK_BUCKET_NAME }}
+        run: |
+          gcloud storage cp app/build/outputs/apk/debug/app-debug.apk gs://$bucket_name/immobylette-debug-$tag_name.apk
+  
+
+  release:
+    name: Build Release and Push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '21'
+
+      - name: "Setup Gradle"
+        uses: gradle/gradle-build-action@v2
+
+      - name: "Add signing key"
+        run: |
+          echo ${{ secrets.KEYSTORE }} | base64 -d > my-release-key.jks
+          echo ${{ secrets.KEYSTORE_PROPERTIES }} > keystore.properties
+
+      - name: "Add api properties"
+        run: |
+          echo "${{ secrets.API_PROPERTIES }}" > api.properties
+
+      - name: "Build with Gradle"
+        run: ./gradlew clean assembleRelease
+
+      - name: Get prefix
+        id: get_prefix
+        run: |
+          prefix=$(echo "${{ github.event.head_commit.message }}" | cut -d'/' -f 1)")
+          echo "Prefix: $prefix"
+          echo "prefix=$prefix" >> "$GITHUB_OUTPUT"
+
+      - name: Get latest tag
+        id: get_tag
+        run: |
+          git fetch --tags
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Latest tag: $latest_tag"
+          echo "tag=$latest_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Determine version bump
+        id: bump_version
+        env:
+          prefix: ${{ steps.get_prefix.outputs.prefix }}
+          tag: ${{ steps.get_tag.outputs.tag }}
+        run: |
+          case $prefix in
+            core)
+              new_version=$(echo $tag | awk -F'.' '{print $1+1"."$2"."$3}')
+              ;;
+            feat)
+              new_version=$(echo $tag | awk -F'.' '{print $1"."$2+1".0"}')
+              ;;
+            fix)
+              new_version=$(echo $tag | awk -F'.' '{print $1"."$2"."$3+1}')
+              ;;
+            *)
+              echo "Invalid prefix: $prefix"
+              exit 1
+              ;;
+          esac
+          echo "New version: $new_version"
+          echo "TAG_NAME=$new_version" >> "$GITHUB_OUTPUT"
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          export_default_credentials: true
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Push Release
+        env:
+          tag_name: ${{ steps.bump_version.outputs.TAG_NAME }}
+          bucket_name: ${{ secrets.GCP_APK_BUCKET_NAME }}
+        run: |
+          gcloud storage cp app/build/outputs/apk/release/app-release.apk gs://$bucket_name/immobylette-$tag_name.apk
+
+      - name: Set new tag
+        run: |
+          git tag ${{ steps.bump_version.outputs.TAG_NAME }}
+          git push origin v${{ steps.bump_version.outputs.TAG_NAME }}

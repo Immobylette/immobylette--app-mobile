@@ -46,6 +46,8 @@ app/build/
 .gradle/
 local.properties
 api.properties
+keystore.properties
+my-release-key.jks
 
 bin/
 gen/
