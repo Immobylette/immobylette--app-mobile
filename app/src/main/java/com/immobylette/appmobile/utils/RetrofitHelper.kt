@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 import com.immobylette.appmobile.BuildConfig
+import com.immobylette.appmobile.data.service.InventoryService
 import com.immobylette.appmobile.data.service.RoomService
 
 object RetrofitHelper {
@@ -17,5 +18,6 @@ object RetrofitHelper {
 
     val propertyService: PropertyService = retrofitClient.create(PropertyService::class.java)
     val agentService: AgentService = retrofitClient.create(AgentService::class.java)
+    val inventoryService: InventoryService = retrofitClient.create(InventoryService::class.java)
     val roomService: RoomService = retrofitClient.create(RoomService::class.java)
 }
