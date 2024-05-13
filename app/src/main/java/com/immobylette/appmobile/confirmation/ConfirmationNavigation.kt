@@ -10,6 +10,7 @@ import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 const val confirmationRoute = "confirmation"
 
 fun NavGraphBuilder.confirmationNavigation(
+    confirmationViewModel: ConfirmationViewModel,
     currentPropertyViewModel: CurrentPropertyViewModel,
     currentInventoryViewModel: CurrentInventoryViewModel,
     currentAgentViewModel: CurrentAgentViewModel,
@@ -20,8 +21,10 @@ fun NavGraphBuilder.confirmationNavigation(
             onNavigateToConfirmed = {
                 val propertyId = currentPropertyViewModel.getId()
                 val agentId = currentAgentViewModel.currentAgent.value
-                currentInventoryViewModel.startInventory(propertyId, agentId)
-                onNavigateToConfirmed()
+                confirmationViewModel.startInventory(propertyId, agentId) {
+                    currentInventoryViewModel.changeCurrentInventory(it)
+                    onNavigateToConfirmed()
+                }
             },
             getTenant = currentPropertyViewModel::getTenant
         )
