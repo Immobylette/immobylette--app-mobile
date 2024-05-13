@@ -12,4 +12,8 @@ class CurrentInventoryViewModel: ViewModel() {
     fun changeCurrentInventory(newInventory: UUID) {
         _currentInventory.value = newInventory
     }
+
+    fun getCurrentInventory(): UUID {
+        return _currentInventory.value
+    }
 }

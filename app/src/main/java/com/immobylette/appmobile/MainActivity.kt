@@ -23,6 +23,7 @@ import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.room.current.CurrentRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
+import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
 
@@ -72,12 +73,13 @@ class MainActivity : ComponentActivity() {
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         currentAgentViewModel = currentAgentViewModel,
-                        onNavigateToConfirmed = {}
+                        onNavigateToConfirmed = navController::navigateToGoToRoom
                     )
 
                     goToRoomNavigation(
                         goToRoomViewModel = goToRoomViewModel,
                         currentRoomViewModel = currentRoomViewModel,
+                        currentInventoryViewModel = currentInventoryViewModel,
                         onNavigateToRoomElements = {}, // TODO : add function
                     )
                 }

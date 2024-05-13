@@ -43,13 +43,14 @@ fun GoToRoomPage(
     state: RoomState,
     fetchCurrentRoom: (id: UUID) -> Unit,
     setCurrentRoomNumber: (roomNumber: Int) -> Unit,
+    getCurrentInventory: () -> UUID,
     onNavigateToRoomElements:() -> Unit
 ) {
     val activity = (LocalContext.current as? Activity)
     setCurrentRoomNumber(state.nbOrder)
 
     LaunchedEffect(Unit) {
-        fetchCurrentRoom(UUID.fromString("ce5ea005-e965-4b1f-adaa-c5903c7ff975"))
+        fetchCurrentRoom(getCurrentInventory())
     }
 
     Column (
