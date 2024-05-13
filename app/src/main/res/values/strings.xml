@@ -4,4 +4,15 @@
     <string name="label_in_progress">En cours</string>
     <string name="label_button_inventory">État des lieux</string>
     <string name="label_button_change_agent">Changer d\'agent</string>
+    <string name="label_button_quit">Quitter</string>
+    <string name="label_button_is_in_room">Je suis dans la pièce</string>
+    <string name="label_go_to_room">Aller dans la pièce n°</string>
+    <string name="label_room_name">Pièce</string>
+    <string name="label_description">Description</string>
+    <string name="label_type">Type</string>
+    <string name="label_allocation">Allocation</string>
+    <string name="label_nb_walls">Nombre de murs</string>
+    <string name="label_nb_doors">Nombre de portes</string>
+    <string name="label_nb_windows">Nombre de fenêtres</string>
+    <string name="label_reference">Note</string>
 </resources>

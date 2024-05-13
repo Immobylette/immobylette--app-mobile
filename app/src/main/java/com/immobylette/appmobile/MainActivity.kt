@@ -17,6 +17,9 @@ import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
 import com.immobylette.appmobile.property.selection.navigateToConfirmationOfAttendance
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
+import com.immobylette.appmobile.room.current.CurrentRoomViewModel
+import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
+import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
 
@@ -24,6 +27,8 @@ class MainActivity : ComponentActivity() {
     private val currentPropertyViewModel by viewModels<CurrentPropertyViewModel>()
 
     private val currentAgentViewModel by viewModels<CurrentAgentViewModel>()
+
+    private val currentRoomViewModel by viewModels<CurrentRoomViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,6 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val agentSelectionViewModel by viewModels<AgentSelectionViewModel>()
             val propertySelectionViewModel by viewModels<PropertySelectionViewModel>()
+            val goToRoomViewModel by viewModels<GoToRoomViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -55,6 +61,12 @@ class MainActivity : ComponentActivity() {
                         currentPropertyViewModel = currentPropertyViewModel,
                         onNavigateToChangeAgent = navController::navigateToAgentSelection,
                         onNavigateToPropertySelected = navController::navigateToConfirmationOfAttendance
+                    )
+
+                    goToRoomNavigation(
+                        goToRoomViewModel = goToRoomViewModel,
+                        currentRoomViewModel = currentRoomViewModel,
+                        onNavigateToRoomElements = {}, // TODO : add function
                     )
                 }
             }
