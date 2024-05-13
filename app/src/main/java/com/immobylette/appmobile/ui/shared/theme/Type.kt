@@ -23,9 +23,17 @@ val interFontFamily = FontFamily(
     Font(googleFont = GoogleFont("Inter"), fontProvider = provider)
 )
 
+val robotoFontFamily = FontFamily(
+    Font(googleFont = GoogleFont("Roboto"), fontProvider = provider)
+)
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     headlineMedium = TextStyle(fontFamily = fredokaFontFamily),
+    headlineLarge = TextStyle(
+        fontFamily = robotoFontFamily,
+        fontSize = 20.sp,
+    ),
     bodyMedium = TextStyle(
         fontFamily = fredokaFontFamily,
         fontWeight = FontWeight.Normal,
