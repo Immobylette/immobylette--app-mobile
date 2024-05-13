@@ -35,7 +35,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             val agentSelectionViewModel by viewModels<AgentSelectionViewModel>()
             val propertySelectionViewModel by viewModels<PropertySelectionViewModel>()
-            val confirmationViewModel by viewModels<ConfirmationViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -63,6 +62,7 @@ class MainActivity : ComponentActivity() {
                     confirmationNavigation(
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
+                        currentAgentViewModel = currentAgentViewModel,
                         onNavigateToConfirmed = {}
                     )
                 }
