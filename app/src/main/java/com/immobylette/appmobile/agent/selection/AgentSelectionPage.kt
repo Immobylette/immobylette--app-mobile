@@ -89,7 +89,6 @@ fun AgentRow(
                 modifier = Modifier.padding(30.dp).width(150.dp).height(agentListHeight.dp),
                 onClick = {
                     setCurrentAgent(agent.id)
-                    println("Navigate call")
                     onNavigateToAgentSelected()
                 }
             )
