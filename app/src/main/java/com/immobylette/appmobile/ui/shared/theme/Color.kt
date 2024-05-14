@@ -16,4 +16,7 @@ var Black = Color(0xFF363636)
 val Blue = Color(0xFF1EC5CC)
 val BlueLight = Color(0xFFBCE2E6)
 
-var Grey = Color(0xFF818181)
+var Grey = Color(0xFFF1F1F1)
+
+val RedTransparent = Color(0x38F23967)
+val GreyTransparent = Color(0xCFF1F1F1)
