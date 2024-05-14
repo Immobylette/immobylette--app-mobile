@@ -75,7 +75,10 @@ fun Element(
             .width(700.dp)
             .animateContentSize()
             .height(if (expanded) 480.dp else 120.dp)
-            .clickable { expanded = !expanded }
+            .clickable {
+                if (!error and !checked)
+                    expanded = !expanded
+            }
             .clip(RoundedCornerShape(10.dp)),
         bottomBar = {
             if (expanded){
