@@ -111,10 +111,12 @@ fun GoToRoomPage(
                             Text(text = state.name)
                         }
                         PropertyRow(propertyName = stringResource(id = R.string.label_description)) {
-                            Text(text = state.description,fontWeight = FontWeight.Bold)
+                            Text(text = state.description)
                         }
-                        PropertyRow(propertyName = stringResource(id = R.string.label_type)) {
-                            BlueRectangleWithText(text = state.roomType)
+                        if(state.roomType != null) {
+                            PropertyRow(propertyName = stringResource(id = R.string.label_type)) {
+                                BlueRectangleWithText(text = state.roomType)
+                            }
                         }
                         if(state.allocation != null) {
                             PropertyRow(propertyName = stringResource(id = R.string.label_allocation)) {

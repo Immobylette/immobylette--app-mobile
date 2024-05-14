@@ -1,5 +1,6 @@
 package com.immobylette.appmobile.room.gotoroom
 
+import android.util.Log
 import  androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.immobylette.appmobile.utils.RetrofitHelper
@@ -26,6 +27,8 @@ class GoToRoomViewModel : ViewModel() {
             if (result.isSuccessful) {
                 val room = result.body()!!.toState()
                 _state.update { room.copy() }
+            } else{
+                Log.e("RequestError", "Error fetching current room")
             }
         }
     }

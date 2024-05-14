@@ -14,5 +14,5 @@ data class RoomState(
     val nbDoors: Int = 0,
     val reference: String? = "",
     val allocation: String? = "",
-    val roomType: String = "",
+    val roomType: String? = "",
 )

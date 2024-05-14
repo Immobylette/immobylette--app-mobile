@@ -27,5 +27,5 @@ data class RoomDto(
     val allocation: String?,
 
     @SerializedName("room_type")
-    val roomType: String,
+    val roomType: String?,
 )
