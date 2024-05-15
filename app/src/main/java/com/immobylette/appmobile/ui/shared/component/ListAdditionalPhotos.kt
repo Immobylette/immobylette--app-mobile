@@ -2,10 +2,8 @@ package com.immobylette.appmobile.ui.shared.component
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -21,6 +19,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -28,7 +28,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -54,10 +53,8 @@ fun ListAdditionalPhotos(
         verticalAlignment = Alignment.CenterVertically
     ) {
         LazyRow (
-            modifier = modifier
-                .fillMaxHeight()
-                .weight(0.8f)
-                .background(Color.Green)
+            modifier = Modifier.fillMaxHeight(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             items(photos){ photo ->
                 Scaffold (
@@ -75,7 +72,7 @@ fun ListAdditionalPhotos(
                         }
                     },
                     modifier = Modifier
-                        .width(100.dp)
+                        .width(120.dp)
                         .fillMaxHeight()
                 ) {
                     Image(
@@ -83,22 +80,23 @@ fun ListAdditionalPhotos(
                         contentScale = ContentScale.Crop,
                         contentDescription = "",
                         modifier = Modifier
-                            .clip(RoundedCornerShape(8.dp))
+                            .clip(RoundedCornerShape(10.dp))
                             .fillMaxWidth()
                             .aspectRatio(1f)
                     )
                 }
                 Spacer(modifier = Modifier.width(8.dp))
             }
+            item {
+                ListAdditionalPhotosButton(
+                    icon = Icons.Rounded.Add,
+                    onClick = onAddPhoto,
+                    modifier = Modifier
+                        .size(50.dp)
+                        .align(Alignment.CenterVertically)
+                )
+            }
         }
-        Spacer(modifier = Modifier.width(10.dp))
-        ListAdditionalPhotosButton(
-            icon = Icons.Rounded.Add,
-            onClick = onAddPhoto,
-            modifier = Modifier
-                .size(50.dp)
-                .align(Alignment.CenterVertically)
-        )
     }
 }
 
@@ -108,16 +106,12 @@ fun ListAdditionalPhotosButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ){
-    Box (
-        modifier = modifier
-            .clip(shape = CircleShape)
-            .background(MaterialTheme.colorScheme.primary)
-            .shadow(
-                elevation = 15.dp,
-                spotColor = Color.Gray,
-                shape = CircleShape
-            ),
-        contentAlignment = Alignment.Center
+    Card (
+        shape = CircleShape,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Icon(
             imageVector = icon,
@@ -131,11 +125,21 @@ fun ListAdditionalPhotosButton(
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun ListAdditionalPhotosPreview(){
     ImmobyletteappmobileTheme {
         ListAdditionalPhotos(
-            photos = listOf(URL("https://picsum.photos/200/300")),
+            photos = listOf(
+                URL("https://picsum.photos/200/300"),
+                URL("https://picsum.photos/200/300"),
+                URL("https://picsum.photos/200/300"),
+                URL("https://picsum.photos/200/300"),
+                URL("https://picsum.photos/200/300"),
+                URL("https://picsum.photos/200/300"),
+//                URL("https://picsum.photos/200/300"),
+//                URL("https://picsum.photos/200/300"),
+//                URL("https://picsum.photos/200/300"),
+            ),
             onDeletePhoto = {},
             onAddPhoto = {}
         )
