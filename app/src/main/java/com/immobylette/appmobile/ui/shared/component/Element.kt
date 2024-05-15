@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -32,26 +33,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.compose.rememberAsyncImagePainter
 import com.immobylette.appmobile.R
+import com.immobylette.appmobile.data.enum.ElementState
 import com.immobylette.appmobile.ui.shared.theme.Grey
 import com.immobylette.appmobile.ui.shared.theme.GreyTransparent
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.ui.shared.theme.RedTransparent
 import java.net.URL
-
-enum class ElementState(val label: String = "") {
-    NEW("Nouveau"),
-    VERY_GOOD("Très bon"),
-    GOOD("Bon"),
-    SO_SO("Moyen"),
-    BAD("Mauvais"),
-    VERY_BAD("Très mauvais")
-}
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -235,7 +227,8 @@ fun LabelNbPhotos(
     ) {
         Tip(
             text = nbPhotos.toString(),
-            style = MaterialTheme.typography.labelSmall,
+            modifier = Modifier.size(20.dp),
+            style = MaterialTheme.typography.labelSmall
         )
         Spacer(modifier = Modifier.width(5.dp))
         Text(text = label, style = MaterialTheme.typography.labelSmall)
