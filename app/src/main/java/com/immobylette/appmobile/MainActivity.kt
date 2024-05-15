@@ -4,6 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
@@ -20,8 +25,10 @@ import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
 import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
+import com.immobylette.appmobile.ui.shared.component.ListAdditionalPhotos
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
+import java.net.URL
 
 class MainActivity : ComponentActivity() {
     private val currentPropertyViewModel by viewModels<CurrentPropertyViewModel>()
@@ -40,35 +47,46 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
-                NavHost(
-                    navController = navController,
-                    startDestination = "agent-selection",
-                ){
-                    agentSelectionNavigation(
-                        agentSelectionViewModel = agentSelectionViewModel,
-                        currentAgentViewModel = currentAgentViewModel,
-                        onNavigateToAgentSelected = navController::navigateToLoadingPage
-                    )
-
-                    loadingNavigation(
-                        onNavigateToLoadingFinished = navController::navigateToPropertySelection
-                    )
-
-                    propertySelectionNavigation(
-                        propertySelectionViewModel = propertySelectionViewModel,
-                        currentPropertyViewModel = currentPropertyViewModel,
-                        onNavigateToChangeAgent = navController::navigateToAgentSelection,
-                        onNavigateToPropertySelected = navController::navigateToConfirmation
-                    )
-
-                    confirmationNavigation(
-                        confirmationViewModel = confirmationViewModel,
-                        currentPropertyViewModel = currentPropertyViewModel,
-                        currentInventoryViewModel = currentInventoryViewModel,
-                        currentAgentViewModel = currentAgentViewModel,
-                        onNavigateToConfirmed = {}
-                    )
-                }
+//                NavHost(
+//                    navController = navController,
+//                    startDestination = "agent-selection",
+//                ){
+//                    agentSelectionNavigation(
+//                        agentSelectionViewModel = agentSelectionViewModel,
+//                        currentAgentViewModel = currentAgentViewModel,
+//                        onNavigateToAgentSelected = navController::navigateToLoadingPage
+//                    )
+//
+//                    loadingNavigation(
+//                        onNavigateToLoadingFinished = navController::navigateToPropertySelection
+//                    )
+//
+//                    propertySelectionNavigation(
+//                        propertySelectionViewModel = propertySelectionViewModel,
+//                        currentPropertyViewModel = currentPropertyViewModel,
+//                        onNavigateToChangeAgent = navController::navigateToAgentSelection,
+//                        onNavigateToPropertySelected = navController::navigateToConfirmation
+//                    )
+//
+//                    confirmationNavigation(
+//                        confirmationViewModel = confirmationViewModel,
+//                        currentPropertyViewModel = currentPropertyViewModel,
+//                        currentInventoryViewModel = currentInventoryViewModel,
+//                        currentAgentViewModel = currentAgentViewModel,
+//                        onNavigateToConfirmed = {}
+//                    )
+//                }
+                ListAdditionalPhotos(
+                    photos = listOf(
+                        URL("http://placekitten.com/200/300"),
+                        URL("http://placekitten.com/200/300"),
+                        URL("http://placekitten.com/200/300"),
+                        URL("http://placekitten.com/200/300"),
+                    ),
+                    onDeletePhoto = {},
+                    onAddPhoto = {},
+                    modifier = Modifier.padding(10.dp)
+                )
             }
         }
     }
