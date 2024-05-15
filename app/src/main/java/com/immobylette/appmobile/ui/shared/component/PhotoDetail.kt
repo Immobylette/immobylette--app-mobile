@@ -45,7 +45,7 @@ fun PhotoDetail(
                 Button(
                     text = stringResource(id = R.string.label_button_cancel),
                     onClick = onCancelClicked,
-                    modifier = modifier.width(150.dp)
+                    modifier = Modifier.width(150.dp)
                 )
             }
         ) {
@@ -53,7 +53,7 @@ fun PhotoDetail(
                 Image(
                     painter = rememberAsyncImagePainter(url.toString()),
                     contentDescription = photoDescription,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .height(400.dp),
                     contentScale = ContentScale.Crop
@@ -61,7 +61,7 @@ fun PhotoDetail(
                 Spacer(modifier = modifier.height(10.dp))
                 Text(
                     text = description,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp),
                     fontFamily = MaterialTheme.typography.headlineMedium.fontFamily,
