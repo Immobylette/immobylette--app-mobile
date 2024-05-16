@@ -31,7 +31,7 @@ fun Slider(
 ){
     val map = getElementStateSliderMap(0f..100f)
 
-    var sliderPosition by remember { mutableFloatStateOf(getSliderPosition(state)) }
+    var sliderPosition by remember { mutableFloatStateOf(getSliderPosition(state, 0f..100f)) }
     Column(modifier = modifier) {
         Slider(
             value = sliderPosition,
@@ -66,8 +66,8 @@ fun getElementStateSliderMap(range: ClosedFloatingPointRange<Float>): Map<Float,
     return map
 }
 
-fun getSliderPosition(elementState: ElementState): Float {
-    val map = getElementStateSliderMap(0f..100f)
+fun getSliderPosition(elementState: ElementState, range: ClosedFloatingPointRange<Float>): Float {
+    val map = getElementStateSliderMap(range)
     return map.entries.find { it.value == elementState }?.key ?: 0f
 }
 
