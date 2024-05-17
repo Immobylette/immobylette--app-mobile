@@ -13,6 +13,8 @@ import com.immobylette.appmobile.agent.selection.navigateToAgentSelection
 import com.immobylette.appmobile.confirmation.ConfirmationViewModel
 import com.immobylette.appmobile.confirmation.confirmationNavigation
 import com.immobylette.appmobile.confirmation.navigateToConfirmation
+import com.immobylette.appmobile.element.camera.cameraNavigation
+import com.immobylette.appmobile.element.current.CurrentElementViewModel
 import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
@@ -20,6 +22,7 @@ import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
 import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
+import com.immobylette.appmobile.step.current.CurrentStepViewModel
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
 
@@ -27,6 +30,8 @@ class MainActivity : ComponentActivity() {
     private val currentPropertyViewModel by viewModels<CurrentPropertyViewModel>()
     private val currentAgentViewModel by viewModels<CurrentAgentViewModel>()
     private val currentInventoryViewModel by viewModels<CurrentInventoryViewModel>()
+    private val currentStepViewModel by viewModels<CurrentStepViewModel>()
+    private val currentElementViewModel by viewModels<CurrentElementViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -42,7 +47,7 @@ class MainActivity : ComponentActivity() {
             ImmobyletteappmobileTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = "agent-selection",
+                    startDestination = "camera",
                 ){
                     agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
@@ -67,6 +72,11 @@ class MainActivity : ComponentActivity() {
                         currentInventoryViewModel = currentInventoryViewModel,
                         currentAgentViewModel = currentAgentViewModel,
                         onNavigateToConfirmed = {}
+                    )
+
+                    cameraNavigation(
+                        currentStepViewModel = currentStepViewModel,
+                        currentElementViewModel = currentElementViewModel
                     )
                 }
             }
