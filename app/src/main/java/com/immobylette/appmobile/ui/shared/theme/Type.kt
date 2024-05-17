@@ -30,10 +30,6 @@ val robotoFontFamily = FontFamily(
 // Set of Material typography styles to start with
 val Typography = Typography(
     headlineMedium = TextStyle(fontFamily = fredokaFontFamily),
-    headlineLarge = TextStyle(
-        fontFamily = robotoFontFamily,
-        fontSize = 20.sp,
-    ),
     bodyMedium = TextStyle(
         fontFamily = fredokaFontFamily,
         fontWeight = FontWeight.Normal,
