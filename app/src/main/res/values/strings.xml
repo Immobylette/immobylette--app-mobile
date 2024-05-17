@@ -9,6 +9,16 @@
     <string name="label_confirmation_message">Pouvez-vous confirmer votre présence svp ?</string>
     <string name="label_button_quit">Quitter</string>
     <string name="label_button_confirm">Confirmer</string>
+    <string name="label_button_is_in_room">Je suis dans la pièce</string>
+    <string name="label_go_to_room">Aller dans la pièce n°</string>
+    <string name="label_room_name">Pièce</string>
+    <string name="label_description">Description</string>
+    <string name="label_type">Type</string>
+    <string name="label_allocation">Allocation</string>
+    <string name="label_nb_walls">Nombre de murs</string>
+    <string name="label_nb_doors">Nombre de portes</string>
+    <string name="label_nb_windows">Nombre de fenêtres</string>
+    <string name="label_reference">Note</string>
     <string name="label_base_photos">Photos de base</string>
     <string name="label_previous_photos">Précédent état des lieux</string>
     <string name="label_button_same_state">Même état</string>
@@ -19,6 +29,7 @@
     <string name="label_clear">Effacer</string>
     <string name="label">label</string>
     <string name="label_button_cancel">Annuler</string>
+    <string name="label_verified_rooms">Pièces vérifiées</string>
     <string name="label_button_take_picture">Veuillez prendre une photo de</string>
     <string name="label_button_take_new_picture">Veuillez prendre une autre photo de</string>
 </resources>

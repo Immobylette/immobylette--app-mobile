@@ -59,12 +59,13 @@ import com.immobylette.appmobile.ui.shared.theme.Pink
 import com.immobylette.appmobile.utils.executor
 import com.immobylette.appmobile.utils.getCameraProvider
 import com.immobylette.appmobile.utils.takePicture
+import com.immobylette.appmobile.ui.shared.component.Button
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CameraPage(
-    takingAnotherPicture: Boolean,
+    takingAnotherPicture: Boolean = false,
     getElementName: () -> String,
     addPhoto: (Photo) -> Unit,
     navigateToElementState: () -> Unit,
@@ -169,7 +170,7 @@ fun CameraPage(
                         }
                     }
                 )
-                com.immobylette.appmobile.ui.shared.component.Button (
+                Button (
                     text = stringResource(id = R.string.label_button_cancel),
                     modifier = Modifier
                         .align(Alignment.BottomStart)
@@ -179,7 +180,7 @@ fun CameraPage(
     }
     if(displayModal) {
         AlertDialog(
-            onDismissRequest = {}
+            onDismissRequest = { displayModal = false }
         ) {
             PhotoDescription(
                 uri = photo.file!!.toUri(),

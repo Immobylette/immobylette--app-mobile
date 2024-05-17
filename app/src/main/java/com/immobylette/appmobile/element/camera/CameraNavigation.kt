@@ -19,7 +19,6 @@ fun NavGraphBuilder.cameraNavigation(
     composable(takePictureRoute) {
         Surface {
             CameraPage(
-                takingAnotherPicture = false,
                 getElementName = currentElementViewModel::getName,
                 addPhoto = currentStepViewModel::addPhoto,
                 navigateToElementState = navigateToElementState,
