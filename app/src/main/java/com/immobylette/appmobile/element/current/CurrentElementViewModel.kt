@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.immobylette.appmobile.element.ElementState
 
 class CurrentElementViewModel: ViewModel() {
-    private val _currentElement = mutableStateOf(ElementState(name="Chaise 1"))
+    private val _currentElement = mutableStateOf(ElementState())
     val currentState: State<ElementState> get() = _currentElement
 
     fun getName(): String {
