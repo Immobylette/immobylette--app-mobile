@@ -21,8 +21,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -36,6 +38,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -43,10 +46,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.data.model.Photo
+import com.immobylette.appmobile.ui.shared.component.PhotoDescription
 import com.immobylette.appmobile.ui.shared.custommodifier.coloredShadow
 import com.immobylette.appmobile.ui.shared.theme.BlueLight
 import com.immobylette.appmobile.ui.shared.theme.Grey
@@ -55,16 +60,19 @@ import com.immobylette.appmobile.utils.executor
 import com.immobylette.appmobile.utils.getCameraProvider
 import com.immobylette.appmobile.utils.takePicture
 import kotlinx.coroutines.launch
-import java.io.File
 
-@OptIn(ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalPermissionsApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CameraPage(
+    takingAnotherPicture: Boolean,
     getElementName: () -> String,
-    addPhoto: (File, String) -> Unit
+    addPhoto: (Photo) -> Unit,
+    navigateToElementState: () -> Unit,
+    onCancelClicked: () -> Unit
 ) {
-    var photo: Photo
+    val photo  by remember { mutableStateOf(Photo(file = null)) }
     val elementName = getElementName()
+    var displayModal by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
@@ -110,8 +118,9 @@ fun CameraPage(
         )
     }
 
-    Box() {
-            Box {
+    Box(
+        modifier = if (displayModal) Modifier.blur(radius = 10.dp) else Modifier,
+    ) {
                 AndroidView(
                     factory = { context ->
                         val previewView = PreviewView(context).apply {
@@ -141,7 +150,7 @@ fun CameraPage(
                         )
                 ) {
                     Text(
-                        text = "${stringResource(id = R.string.label_button_take_picture)} : $elementName",
+                        text = "${if(takingAnotherPicture) stringResource(id = R.string.label_button_take_new_picture) else stringResource(id = R.string.label_button_take_picture)} : $elementName",
                         modifier = Modifier.padding(10.dp),
                         style = MaterialTheme.typography.bodyMedium
                     )
@@ -154,19 +163,33 @@ fun CameraPage(
                     onClick = {
                         coroutineScope.launch {
                             imageCaptureUseCase.takePicture(context.executor).let {
-                                photo = Photo(file = it)
+                                photo.file = it
+                                displayModal = true
                             }
                         }
                     }
                 )
                 com.immobylette.appmobile.ui.shared.component.Button (
-                    text = stringResource(id = R.string.label_button_quit),
+                    text = stringResource(id = R.string.label_button_cancel),
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(0.dp),
-                    onClick = {}
+                    onClick = onCancelClicked
                 )
-            }
+    }
+    if(displayModal) {
+        AlertDialog(
+            onDismissRequest = {}
+        ) {
+            PhotoDescription(
+                uri = photo.file!!.toUri(),
+                onNextClick = {
+                    photo.description = it
+                    addPhoto(photo)
+                    navigateToElementState()
+                },
+            )
+        }
     }
 }
 

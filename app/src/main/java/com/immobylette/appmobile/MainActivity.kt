@@ -89,7 +89,9 @@ class MainActivity : ComponentActivity() {
 
                     cameraNavigation(
                         currentStepViewModel = currentStepViewModel,
-                        currentElementViewModel = currentElementViewModel
+                        currentElementViewModel = currentElementViewModel,
+                        navigateToElementState = {},
+                        onCancelClicked = { navController.navigateUp() }
                     )
                 }
             }
