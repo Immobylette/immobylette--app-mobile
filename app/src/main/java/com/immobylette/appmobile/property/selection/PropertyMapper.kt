@@ -14,6 +14,7 @@ fun PropertyDto.toState() = PropertyState(
     currentTenant = currentTenant?.toFormattedString(),
     address = address.toFormattedString(),
     currentInventory = currentInventory != null,
+    currentInventoryId = currentInventory,
     photo = URL("https://picsum.photos/200/300") //TODO: Modify when the backend will retrieve photos
 )
 

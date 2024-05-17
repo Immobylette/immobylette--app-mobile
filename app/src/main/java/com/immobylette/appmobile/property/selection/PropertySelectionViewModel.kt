@@ -67,6 +67,7 @@ class PropertySelectionViewModel: ViewModel() {
                                     currentTenant = property.currentTenant,
                                     address = prop.address,
                                     currentInventory = property.currentInventory,
+                                    currentInventoryId = property.currentInventoryId,
                                     photo = prop.photo,
                                     distance = prop.distance,
                                 )

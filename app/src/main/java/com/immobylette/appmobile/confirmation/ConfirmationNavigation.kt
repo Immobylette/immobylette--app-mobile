@@ -19,11 +19,18 @@ fun NavGraphBuilder.confirmationNavigation(
     composable(confirmationRoute) {
         ConfirmationPage (
             onNavigateToConfirmed = {
-                val propertyId = currentPropertyViewModel.getId()
-                val agentId = currentAgentViewModel.currentAgent.value
-                confirmationViewModel.startInventory(propertyId, agentId) {
-                    currentInventoryViewModel.changeCurrentInventory(it)
+                val currentInventoryId = currentPropertyViewModel.getCurrentInventoryId()
+                if(currentInventoryId != null) {
+                    currentInventoryViewModel.changeCurrentInventory(currentInventoryId)
                     onNavigateToConfirmed()
+                } else {
+                    val propertyId = currentPropertyViewModel.getId()
+                    val agentId = currentAgentViewModel.currentAgent.value
+                    confirmationViewModel.startInventory(propertyId, agentId) {
+                        currentInventoryViewModel.changeCurrentInventory(it)
+                        onNavigateToConfirmed()
+                    }
+
                 }
             },
             getTenant = currentPropertyViewModel::getTenant

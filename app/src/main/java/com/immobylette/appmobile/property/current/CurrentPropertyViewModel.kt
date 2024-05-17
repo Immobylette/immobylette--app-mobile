@@ -15,10 +15,14 @@ class CurrentPropertyViewModel: ViewModel() {
     }
 
     fun getTenant(): String? {
-        return _currentProperty.value.currentTenant;
+        return _currentProperty.value.currentTenant
     }
 
     fun getId(): UUID {
-        return _currentProperty.value.id;
+        return _currentProperty.value.id
+    }
+
+    fun getCurrentInventoryId(): UUID? {
+        return _currentProperty.value.currentInventoryId
     }
 }
