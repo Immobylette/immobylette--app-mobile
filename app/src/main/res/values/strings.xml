@@ -29,4 +29,5 @@
     <string name="label_clear">Effacer</string>
     <string name="label">label</string>
     <string name="label_button_cancel">Annuler</string>
+    <string name="label_verified_rooms">Pièces vérifiées</string>
 </resources>
