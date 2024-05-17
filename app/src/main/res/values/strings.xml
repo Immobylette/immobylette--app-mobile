@@ -19,4 +19,14 @@
     <string name="label_nb_doors">Nombre de portes</string>
     <string name="label_nb_windows">Nombre de fenêtres</string>
     <string name="label_reference">Note</string>
+    <string name="label_base_photos">Photos de base</string>
+    <string name="label_previous_photos">Précédent état des lieux</string>
+    <string name="label_button_same_state">Même état</string>
+    <string name="label_button_new_state">Nouvel état</string>
+    <string name="label_button_next">Suivant</string>
+    <string name="label_captured_photo">Photo capturée</string>
+    <string name="label_photo_description">Commentaires</string>
+    <string name="label_clear">Effacer</string>
+    <string name="label">label</string>
+    <string name="label_button_cancel">Annuler</string>
 </resources>
