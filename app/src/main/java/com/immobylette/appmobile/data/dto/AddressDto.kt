@@ -14,6 +14,6 @@ data class AddressDto(
     val longitude: Float
 ){
     fun toFormattedString(): String {
-        return "$number $street ${floor ?: ""} ${extra ?: ""}, $zip $city"
+        return "$number $street${if (floor != null) " Etage $floor" else ""}${if (extra != null) " $extra" else ""}, $zip $city"
     }
 }

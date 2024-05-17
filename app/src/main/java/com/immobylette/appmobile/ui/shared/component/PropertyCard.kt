@@ -71,14 +71,14 @@ fun PropertyCard(
     Column (
         modifier = modifier
     ) {
-        Surface(
+        Box(
             modifier = Modifier
                 .height(300.dp)
                 .padding(start = 30.dp, end = 30.dp)
                 .fillMaxWidth()
-                .wrapContentSize()
                 .shadow(if (tapped) 2.dp else 0.dp)
                 .zIndex(2f)
+                .background(White)
                 .clickable {
                     tapped = !tapped
                     if (tapped) onExpanded()
@@ -92,52 +92,47 @@ fun PropertyCard(
                     .zIndex(3f)
                     .background(Pink)
             )
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
+            Column (
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(White)
-                    .padding(start = 100.dp, end = 100.dp)
+                    .padding(start = 100.dp)
+                    .align(Alignment.CenterStart)
             ) {
-                Column (
-                ) {
-                    Image(
-                        painter = rememberAsyncImagePainter(photoUrl.toString()),
-                        contentScale = ContentScale.Crop,
-                        contentDescription = address,
-                        modifier = Modifier
-                            .size(imageSize)
-                            .clip(RectangleShape)
-                    )
-                    Spacer(modifier = Modifier.height(24.dp))
+                Image(
+                    painter = rememberAsyncImagePainter(photoUrl.toString()),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = address,
+                    modifier = Modifier
+                        .size(imageSize)
+                        .clip(RectangleShape)
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    text = address,
+                    style = MaterialTheme.typography.bodyMedium)
+            }
+            Column (
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxHeight()
+                    .padding(end = 60.dp, top = 33.dp, bottom = 45.dp)
+            ) {
+                if(inProgress) {
                     Text(
-                        text = address,
-                        style = MaterialTheme.typography.bodyMedium)
+                        text = stringResource(id = R.string.label_in_progress),
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = Pink,
+                    )
+                } else {
+                    Spacer(modifier = Modifier
+                        .width(1.dp)
+                        .height(10.dp))
                 }
-                Column (
-                    verticalArrangement = Arrangement.SpaceBetween,
+                Text(text = convertDistanceToString(distance = distance),
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier
                         .fillMaxHeight()
-                        .padding(top = 33.dp, bottom = 45.dp)
-                ) {
-                    if(inProgress) {
-                        Text(
-                            text = stringResource(id = R.string.label_in_progress),
-                            style = MaterialTheme.typography.headlineSmall,
-                            color = Pink,
-                        )
-                    } else {
-                        Spacer(modifier = Modifier
-                            .width(1.dp)
-                            .height(10.dp))
-                    }
-                    Text(text = convertDistanceToString(distance = distance),
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .wrapContentHeight(align = Alignment.CenterVertically))
-                }
+                        .wrapContentHeight(align = Alignment.CenterVertically))
             }
         }
         AnimatedVisibility(
@@ -240,7 +235,7 @@ fun PropertyCardPreview(){
                     .wrapContentSize()) {
                 Column {
                     PropertyCard(
-                        address = "18 Rue Jean Souvraz",
+                        address = "25 Rue de l'Hôpital Militaire, 59800 Lille",
                         nbRooms = 3,
                         propertyType = "Appartment",
                         propertyClass = "T1",
