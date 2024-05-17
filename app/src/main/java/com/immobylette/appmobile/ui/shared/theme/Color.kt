@@ -14,5 +14,6 @@ val PinkLight = Color(0x5CF23967)
 var Black = Color(0xFF363636)
 
 val Blue = Color(0xFF1EC5CC)
+val BlueLight = Color(0xFFBCE2E6)
 
 var Grey = Color(0xFF818181)
