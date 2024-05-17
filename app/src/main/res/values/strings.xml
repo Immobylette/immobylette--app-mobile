@@ -9,6 +9,10 @@
     <string name="label_confirmation_message">Pouvez-vous confirmer votre présence svp ?</string>
     <string name="label_button_quit">Quitter</string>
     <string name="label_button_confirm">Confirmer</string>
+    <string name="label_base_photos">Photos de base</string>
+    <string name="label_previous_photos">Précédent état des lieux</string>
+    <string name="label_button_same_state">Même état</string>
+    <string name="label_button_new_state">Nouvel état</string>
     <string name="label_button_next">Suivant</string>
     <string name="label_captured_photo">Photo capturée</string>
     <string name="label_photo_description">Commentaires</string>
