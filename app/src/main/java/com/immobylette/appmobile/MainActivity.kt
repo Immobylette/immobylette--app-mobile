@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
             ImmobyletteappmobileTheme {
                 NavHost(
                     navController = navController,
-                    startDestination = "camera",
+                    startDestination = "agent-selection",
                 ){
                     agentSelectionNavigation(
                         agentSelectionViewModel = agentSelectionViewModel,
@@ -76,7 +76,9 @@ class MainActivity : ComponentActivity() {
 
                     cameraNavigation(
                         currentStepViewModel = currentStepViewModel,
-                        currentElementViewModel = currentElementViewModel
+                        currentElementViewModel = currentElementViewModel,
+                        navigateToElementState = {},
+                        onCancelClicked = { navController.navigateUp() }
                     )
                 }
             }
