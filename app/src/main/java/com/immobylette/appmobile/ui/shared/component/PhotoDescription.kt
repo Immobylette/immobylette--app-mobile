@@ -1,8 +1,11 @@
 package com.immobylette.appmobile.ui.shared.component
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,18 +33,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
-import java.net.URI
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PhotoDescription(
-    uri: URI,
+    uri: Uri,
     modifier: Modifier = Modifier,
     onNextClick: (String) -> Unit
 ) {
@@ -66,16 +69,18 @@ fun PhotoDescription(
                         modifier = Modifier.width(200.dp)
                     )
                 }
-            }
+            },
         ) {
-            Column {
+            Column(
+                modifier = Modifier.clip(RoundedCornerShape(20.dp))
+            ) {
                 Image(
                     painter = rememberAsyncImagePainter(uri),
                     contentDescription = stringResource(id = R.string.label_captured_photo),
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(1f)
-                        .clip(RoundedCornerShape(20.dp))
                 )
                 Spacer(modifier = modifier.height(10.dp))
                 Column (
@@ -105,6 +110,9 @@ fun PhotoDescription(
                             Icon(
                                 imageVector = Icons.Default.Clear,
                                 contentDescription = stringResource(id = R.string.label_clear),
+                                modifier = Modifier.clickable {
+                                    photoDescription = ""
+                                }
                             )
                         },
                         colors = TextFieldDefaults.colors(
@@ -126,8 +134,8 @@ fun PhotoDescriptionPreview(){
             contentAlignment = androidx.compose.ui.Alignment.Center
         ) {
             PhotoDescription(
-                uri = URI("https://fr.web.img4.acsta.net/r_1920_1080/medias/nmedia/18/74/23/35/20142770.jpg"),
-                onNextClick = {}
+                uri = Uri.parse("http://placekitten.com/200/300"),
+                onNextClick = {},
             )
         }
     }

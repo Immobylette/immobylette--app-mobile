@@ -30,4 +30,6 @@
     <string name="label">label</string>
     <string name="label_button_cancel">Annuler</string>
     <string name="label_verified_rooms">Pièces vérifiées</string>
+    <string name="label_button_take_picture">Veuillez prendre une photo de</string>
+    <string name="label_button_take_new_picture">Veuillez prendre une autre photo de</string>
 </resources>

@@ -13,6 +13,8 @@ import com.immobylette.appmobile.agent.selection.navigateToAgentSelection
 import com.immobylette.appmobile.confirmation.ConfirmationViewModel
 import com.immobylette.appmobile.confirmation.confirmationNavigation
 import com.immobylette.appmobile.confirmation.navigateToConfirmation
+import com.immobylette.appmobile.element.camera.cameraNavigation
+import com.immobylette.appmobile.element.current.CurrentElementViewModel
 import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
@@ -24,6 +26,7 @@ import com.immobylette.appmobile.room.current.CurrentRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
+import com.immobylette.appmobile.step.current.CurrentStepViewModel
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
 
@@ -31,7 +34,8 @@ class MainActivity : ComponentActivity() {
     private val currentPropertyViewModel by viewModels<CurrentPropertyViewModel>()
     private val currentAgentViewModel by viewModels<CurrentAgentViewModel>()
     private val currentInventoryViewModel by viewModels<CurrentInventoryViewModel>()
-
+    private val currentStepViewModel by viewModels<CurrentStepViewModel>()
+    private val currentElementViewModel by viewModels<CurrentElementViewModel>()
     private val currentRoomViewModel by viewModels<CurrentRoomViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +85,13 @@ class MainActivity : ComponentActivity() {
                         currentRoomViewModel = currentRoomViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         onNavigateToRoomElements = {}, // TODO : add function
+                    )
+
+                    cameraNavigation(
+                        currentStepViewModel = currentStepViewModel,
+                        currentElementViewModel = currentElementViewModel,
+                        navigateToElementState = {},
+                        onCancelClicked = { navController.navigateUp() }
                     )
                 }
             }
