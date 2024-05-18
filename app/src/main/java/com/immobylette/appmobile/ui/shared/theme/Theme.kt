@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -19,18 +18,19 @@ import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.core.view.WindowCompat
 import com.immobylette.appmobile.R
-import androidx.compose.ui.text.TextStyle
 
 private val DarkColorScheme = darkColorScheme(
     primary = Pink,
     secondary = Blue,
-    tertiary = Pink80
+    tertiary = Pink80,
+    background = Grey // Set the background color for all views
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Pink,
     secondary = Blue,
-    tertiary = Pink40
+    tertiary = Pink40,
+    background = Grey // Set the background color for all views
 )
 
 @Composable

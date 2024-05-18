@@ -67,4 +67,12 @@ val Typography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     ),
+    titleMedium = TextStyle(
+        fontFamily = fredokaFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 23.sp,
+        lineHeight = 30.sp,
+        letterSpacing = 0.5.sp,
+        color = Pink
+    ),
 )

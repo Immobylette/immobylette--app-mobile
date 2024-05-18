@@ -42,12 +42,12 @@ import java.util.UUID
 fun GoToRoomPage(
     state: RoomState,
     fetchCurrentRoom: (id: UUID) -> Unit,
-    setCurrentRoomNumber: (roomNumber: Int) -> Unit,
+    setCurrentRoom: (room: RoomState) -> Unit,
     getCurrentInventory: () -> UUID,
     onNavigateToRoomElements:() -> Unit
 ) {
     val activity = (LocalContext.current as? Activity)
-    setCurrentRoomNumber(state.nbOrder)
+    setCurrentRoom(state)
 
     LaunchedEffect(Unit) {
         fetchCurrentRoom(getCurrentInventory())

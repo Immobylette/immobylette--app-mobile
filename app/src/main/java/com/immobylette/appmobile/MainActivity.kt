@@ -4,6 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
@@ -14,6 +19,7 @@ import com.immobylette.appmobile.confirmation.ConfirmationViewModel
 import com.immobylette.appmobile.confirmation.confirmationNavigation
 import com.immobylette.appmobile.confirmation.navigateToConfirmation
 import com.immobylette.appmobile.element.camera.cameraNavigation
+import com.immobylette.appmobile.element.camera.navigateToTakePicture
 import com.immobylette.appmobile.element.current.CurrentElementViewModel
 import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.loading.navigateToLoadingPage
@@ -23,6 +29,9 @@ import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.room.current.CurrentRoomViewModel
+import com.immobylette.appmobile.room.elements.WallsViewModel
+import com.immobylette.appmobile.room.elements.elementsNavigation
+import com.immobylette.appmobile.room.elements.navigateToWalls
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
@@ -48,6 +57,7 @@ class MainActivity : ComponentActivity() {
             val propertySelectionViewModel by viewModels<PropertySelectionViewModel>()
             val confirmationViewModel by viewModels<ConfirmationViewModel>()
             val goToRoomViewModel by viewModels<GoToRoomViewModel>()
+            val wallsViewModel by viewModels<WallsViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -84,7 +94,16 @@ class MainActivity : ComponentActivity() {
                         goToRoomViewModel = goToRoomViewModel,
                         currentRoomViewModel = currentRoomViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
-                        onNavigateToRoomElements = {}, // TODO : add function
+                        onNavigateToRoomElements = navController::navigateToWalls
+                    )
+
+                    elementsNavigation(
+                        wallsViewModel = wallsViewModel,
+                        currentRoomViewModel = currentRoomViewModel,
+                        currentPropertyViewModel = currentPropertyViewModel,
+                        currentInventoryViewModel = currentInventoryViewModel,
+                        currentElementViewModel = currentElementViewModel,
+                        onNavigateToTakePicture = navController::navigateToTakePicture
                     )
 
                     cameraNavigation(

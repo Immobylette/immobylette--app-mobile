@@ -60,7 +60,7 @@ class PropertySelectionViewModel: ViewModel() {
                             if (prop.id == id) {
                                 PropertyState(
                                     id = prop.id,
-                                    nbRooms = prop.nbRooms,
+                                    nbRooms = property.nbRooms,
                                     propertyType = prop.propertyType,
                                     propertyClass = prop.propertyClass,
                                     owner = property.owner,

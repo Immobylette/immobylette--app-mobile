@@ -21,4 +21,8 @@ class CurrentPropertyViewModel: ViewModel() {
     fun getId(): UUID {
         return _currentProperty.value.id;
     }
+
+    fun getNbRooms(): Int {
+        return _currentProperty.value.nbRooms;
+    }
 }
