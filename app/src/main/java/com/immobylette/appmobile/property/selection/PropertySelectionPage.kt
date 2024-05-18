@@ -99,7 +99,7 @@ fun PropertySelectionPage (
             LazyColumn(state = listState) {
                 items(state.properties) { property ->
                     PropertyCard(
-                        address = property.address,
+                        address = property.address!!.toFormattedString(stringResource(id = R.string.label_floor)),
                         nbRooms =  property.nbRooms,
                         propertyType = property.propertyType,
                         propertyClass = property.propertyClass,
