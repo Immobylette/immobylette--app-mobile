@@ -76,6 +76,8 @@ class WallsViewModel: ViewModel() {
     }
 
     fun check(id: UUID, state: ElementStateEnum){
+        //TODO: Check the element with the given id when the backend's endpoint is ready
+
         _walls.update { current ->
             current.copy(
                 elements = current.elements.map { element ->
@@ -89,7 +91,11 @@ class WallsViewModel: ViewModel() {
         }
     }
 
-    fun checkAll(inventoryId: UUID) {
-        //TODO: implement when we'll have the element state page
+    fun checkAll() {
+        _walls.value.elements.forEach { element ->
+            if (!element.checked) {
+                check(element.id, element.state) // We apply the previous state as the new one
+            }
+        }
     }
 }

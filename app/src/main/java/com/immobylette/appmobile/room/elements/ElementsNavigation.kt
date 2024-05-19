@@ -36,9 +36,7 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWindows = currentRoomViewModel::getNbWindows,
             onClickSameState = { element -> wallsViewModel.check(element.id, element.state)},
             setCurrentElement = currentElementViewModel::setCurrentElement,
-            onClickOnNext = {
-                wallsViewModel.checkAll(inventoryId)
-            },
+            onClickOnNext = wallsViewModel::checkAll,
             fetchElements = { wallsViewModel.fetchWallList(inventoryId) },
             fetchElement = { elementId: UUID -> wallsViewModel.fetchWall(inventoryId, elementId) },
             onNavigateToTakePicture = onNavigateToTakePicture

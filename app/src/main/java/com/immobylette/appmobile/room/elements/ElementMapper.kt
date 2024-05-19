@@ -6,7 +6,7 @@ import com.immobylette.appmobile.data.enum.ElementState as ElementStateEnum
 
 fun ElementSummaryDto.toState() = ElementState(
     id = id,
-    name = "Test1",
+    name = name,
     description = description,
     type = type,
     attributes = attributes,
@@ -18,7 +18,7 @@ fun ElementSummaryDto.toState() = ElementState(
 
 fun ElementDto.toState() = ElementState(
     id = id,
-    name = "Test1",
+    name = name,
     description = description,
     type = type,
     attributes = attributes,
