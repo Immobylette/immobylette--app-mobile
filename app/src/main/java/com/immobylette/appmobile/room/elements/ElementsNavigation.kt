@@ -12,19 +12,21 @@ import com.immobylette.appmobile.room.current.CurrentRoomViewModel
 import java.util.UUID
 
 const val wallsRoute = "walls"
+const val elementsRoute = "elements"
 
 fun NavGraphBuilder.elementsNavigation(
     wallsViewModel: WallsViewModel,
+    elementsViewModel: ElementsViewModel,
     currentRoomViewModel: CurrentRoomViewModel,
     currentPropertyViewModel: CurrentPropertyViewModel,
     currentInventoryViewModel: CurrentInventoryViewModel,
     currentElementViewModel: CurrentElementViewModel,
     onNavigateToTakePicture: () -> Unit,
 ) {
+    val inventoryId = currentInventoryViewModel.currentInventory.value
+
     composable(wallsRoute){
         val walls: ElementListState by wallsViewModel.walls.collectAsStateWithLifecycle()
-
-        val inventoryId = currentInventoryViewModel.currentInventory.value
 
         ElementsPage(
             isWallsPage = true,
@@ -42,8 +44,31 @@ fun NavGraphBuilder.elementsNavigation(
             onNavigateToTakePicture = onNavigateToTakePicture
         )
     }
+
+    composable(elementsRoute) {
+        val elements: ElementListState by elementsViewModel.elements.collectAsStateWithLifecycle()
+
+        ElementsPage(
+            elements = elements,
+            getNbRooms = currentPropertyViewModel::getNbRooms,
+            getRoomNumber = currentRoomViewModel::getOrderNb,
+            getNbWalls = currentRoomViewModel::getNbWalls,
+            getNbDoors = currentRoomViewModel::getNbDoors,
+            getNbWindows = currentRoomViewModel::getNbWindows,
+            onClickSameState = { element -> elementsViewModel.check(element.id, element.state)},
+            setCurrentElement = currentElementViewModel::setCurrentElement,
+            onClickOnNext = elementsViewModel::checkAll,
+            fetchElements = { elementsViewModel.fetchElementList(inventoryId) },
+            fetchElement = { elementId: UUID -> elementsViewModel.fetchElement(inventoryId, elementId) },
+            onNavigateToTakePicture = onNavigateToTakePicture
+        )
+    }
 }
 
 fun NavController.navigateToWalls() {
     navigate(wallsRoute)
+}
+
+fun NavController.navigateToElements() {
+    navigate(elementsRoute)
 }

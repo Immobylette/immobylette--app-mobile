@@ -29,6 +29,7 @@ import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.room.current.CurrentRoomViewModel
+import com.immobylette.appmobile.room.elements.ElementsViewModel
 import com.immobylette.appmobile.room.elements.WallsViewModel
 import com.immobylette.appmobile.room.elements.elementsNavigation
 import com.immobylette.appmobile.room.elements.navigateToWalls
@@ -58,6 +59,7 @@ class MainActivity : ComponentActivity() {
             val confirmationViewModel by viewModels<ConfirmationViewModel>()
             val goToRoomViewModel by viewModels<GoToRoomViewModel>()
             val wallsViewModel by viewModels<WallsViewModel>()
+            val elementsViewModel by viewModels<ElementsViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -99,6 +101,7 @@ class MainActivity : ComponentActivity() {
 
                     elementsNavigation(
                         wallsViewModel = wallsViewModel,
+                        elementsViewModel = elementsViewModel,
                         currentRoomViewModel = currentRoomViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,

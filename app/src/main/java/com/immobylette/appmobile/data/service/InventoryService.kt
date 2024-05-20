@@ -17,6 +17,9 @@ interface InventoryService {
     @GET("inventories/{id}/walls")
     suspend fun getWalls(@Path("id") id: UUID): Response<List<ElementSummaryDto>>
 
+    @GET("inventories/{id}/elements")
+    suspend fun getElements(@Path("id") id: UUID): Response<List<ElementSummaryDto>>
+
     @GET("inventories/{inventoryId}/elements/{elementId}")
     suspend fun getElement(
         @Path("inventoryId") inventoryId: UUID,
