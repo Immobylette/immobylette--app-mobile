@@ -22,7 +22,7 @@ fun NavGraphBuilder.goToRoomNavigation(
         GoToRoomPage(
             state = state,
             fetchCurrentRoom = goToRoomViewModel::fetchCurrentRoom,
-            setCurrentRoomNumber = currentRoomViewModel::setCurrentRoomNumber,
+            setCurrentRoom = currentRoomViewModel::setCurrentRoom,
             getCurrentInventory = currentInventoryViewModel::getCurrentInventory,
             onNavigateToRoomElements = onNavigateToRoomElements
         )

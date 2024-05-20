@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.compose.rememberAsyncImagePainter
 import com.immobylette.appmobile.R
+import com.immobylette.appmobile.data.dto.PhotoUrlDto
 import com.immobylette.appmobile.data.enum.ElementState
 import com.immobylette.appmobile.ui.shared.theme.Grey
 import com.immobylette.appmobile.ui.shared.theme.GreyTransparent
@@ -52,24 +54,30 @@ fun Element(
     name: String,
     description: String,
     state: ElementState,
-    basePhotos: List<URL>,
-    previousPhotos: List<URL>,
+    basePhotos: List<PhotoUrlDto>,
+    previousPhotos: List<PhotoUrlDto>,
     checked: Boolean,
     error: Boolean,
     onClickNewState: () -> Unit,
     onClickSameState: () -> Unit,
-    onClickPhoto: (URL) -> Unit,
+    onClickPhoto: (PhotoUrlDto) -> Unit,
+    onExpanded: () -> Unit,
+    modifier: Modifier = Modifier
     ) {
     var expanded by remember { mutableStateOf(false) }
 
     Scaffold(
-        modifier = Modifier
+        containerColor = Color.White,
+        modifier = modifier
             .width(700.dp)
             .animateContentSize()
             .height(if (expanded) 480.dp else 120.dp)
             .clickable {
-                if (!error and !checked)
+                if (!error and !checked){
                     expanded = !expanded
+                    if (expanded) onExpanded()
+                }
+
             }
             .clip(RoundedCornerShape(10.dp)),
         bottomBar = {
@@ -77,7 +85,10 @@ fun Element(
                 Row (modifier = Modifier.fillMaxWidth()){
                     Button(
                         text = stringResource(id = R.string.label_button_same_state),
-                        onClick = onClickSameState,
+                        onClick = {
+                            expanded = false
+                            onClickSameState()
+                        },
                         modifier = Modifier.width(200.dp)
                     )
                     Spacer(modifier = Modifier.weight(1f))
@@ -187,8 +198,8 @@ fun Element(
 @Composable
 fun ElementPhotos(
     title: String,
-    photos: List<URL>,
-    onClickPhoto: (URL) -> Unit
+    photos: List<PhotoUrlDto>,
+    onClickPhoto: (PhotoUrlDto) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -199,16 +210,16 @@ fun ElementPhotos(
         LazyRow(
             modifier = Modifier.fillMaxWidth()
         ) {
-            items(photos) { photoUrl ->
+            items(photos) { photo ->
                 Image(
-                    painter = rememberAsyncImagePainter(photoUrl.toString()),
+                    painter = rememberAsyncImagePainter(photo.url.toString()),
                     contentScale = ContentScale.Crop,
-                    contentDescription = "",
+                    contentDescription = photo.description ?: "",
                     modifier = Modifier
                         .clip(RoundedCornerShape(10.dp))
                         .height(100.dp)
                         .aspectRatio(1f)
-                        .clickable(onClick = { onClickPhoto(photoUrl) })
+                        .clickable(onClick = { onClickPhoto(photo) })
                 )
                 Spacer(modifier = Modifier.width(5.dp))
             }
@@ -247,13 +258,28 @@ fun ElementPreview() {
             name = "Nom de l'élément",
             description = "Description de l'élément",
             state = ElementState.NEW,
-            basePhotos = listOf(URL("http://placekitten.com/200/300"), URL("http://placekitten.com/200/300")),
-            previousPhotos = listOf(URL("http://placekitten.com/200/300")),
+            basePhotos = listOf(
+                PhotoUrlDto(
+                    url = URL("http://placekitten.com/200/300"),
+                    description = "cocuou"
+                ),
+                PhotoUrlDto(
+                    url = URL("http://placekitten.com/200/300"),
+                    description = "bonjour"
+                )
+            ),
+            previousPhotos = listOf(
+                PhotoUrlDto(
+                    url = URL("http://placekitten.com/200/300"),
+                    description = "cocuou"
+                )
+            ),
             checked = false,
             error = false,
             onClickNewState = {},
             onClickSameState = {},
-            onClickPhoto = {}
+            onClickPhoto = {},
+            onExpanded = {}
         )
     }
 }
