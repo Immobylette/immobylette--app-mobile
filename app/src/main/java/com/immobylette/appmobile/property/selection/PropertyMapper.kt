@@ -12,7 +12,7 @@ fun PropertyDto.toState() = PropertyState(
     propertyClass = propertyClass,
     owner = owner.toFormattedString(),
     currentTenant = currentTenant?.toFormattedString(),
-    address = address.toFormattedString(),
+    address = address,
     currentInventory = currentInventory != null,
     currentInventoryId = currentInventory,
     photo = URL("https://picsum.photos/200/300") //TODO: Modify when the backend will retrieve photos
@@ -22,7 +22,7 @@ fun PropertySummaryDto.toState() = PropertyState(
     id = id,
     propertyType = propertyType,
     propertyClass = propertyClass,
-    address = address.toFormattedString(),
+    address = address,
     currentInventory = currentInventory,
     photo = URL("https://picsum.photos/200/300"), //TODO: Modify when the backend will retrieve photos
     distance = distance
