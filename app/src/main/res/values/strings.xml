@@ -43,4 +43,6 @@
     <string name="label_windows">Fenêtres</string>
     <string name="label_confirm_check_all">Confirmation de la vérification de tous les éléments</string>
     <string name="label_confirm_check_all_warning">Avertissement : Tous les éléments qui n\'ont pas été vérifiés seront considérés comme étant dans l\'état \"Très bon\" ou dans l\'état de l\’état des lieux précédent</string>
+    <string name="label_popup_quit_app">Voulez-vous quitter ?</string>
+    <string name="label_description_popup_quit_app">Vos changements seront sauvegardés</string>
 </resources>
