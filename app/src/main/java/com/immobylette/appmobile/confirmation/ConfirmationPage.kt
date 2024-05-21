@@ -1,7 +1,6 @@
 package com.immobylette.appmobile.confirmation
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,16 +16,21 @@ import androidx.compose.material3.Scaffold
 import com.immobylette.appmobile.ui.shared.component.GraphicFooter
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.ui.shared.component.Button
+import com.immobylette.appmobile.ui.shared.component.QuitAppPopup
 import com.immobylette.appmobile.ui.shared.component.Title
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 
@@ -38,10 +42,10 @@ fun ConfirmationPage(
 ) {
     val currentTenant = getTenant()
     val buttonWidth = 200.dp
-    val activity = (LocalContext.current as? Activity)
+    var displayModalQuitApp by remember { mutableStateOf(false) }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().blur(if (displayModalQuitApp) 10.dp else 0.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -58,7 +62,7 @@ fun ConfirmationPage(
                     Row(modifier = Modifier.fillMaxWidth()){
                         Button(
                             text = stringResource(id = R.string.label_button_quit),
-                            onClick = { activity?.finish() },
+                            onClick = { displayModalQuitApp = true },
                             hasTwoRoundedCorners = true,
                             modifier = Modifier.width(buttonWidth),
                         )
@@ -99,6 +103,12 @@ fun ConfirmationPage(
             }
         }
         GraphicFooter()
+        if (displayModalQuitApp) {
+            QuitAppPopup(
+                onDismissRequest = { displayModalQuitApp = false },
+                onCancelClicked = { displayModalQuitApp = false },
+            )
+        }
     }
 }
 

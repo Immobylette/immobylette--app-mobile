@@ -1,7 +1,6 @@
 package com.immobylette.appmobile.room.gotoroom
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,11 +17,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -32,6 +35,7 @@ import androidx.compose.ui.unit.times
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.ui.shared.component.Button
 import com.immobylette.appmobile.ui.shared.component.GraphicFooter
+import com.immobylette.appmobile.ui.shared.component.QuitAppPopup
 import com.immobylette.appmobile.ui.shared.component.Tip
 import com.immobylette.appmobile.ui.shared.component.Title
 import com.immobylette.appmobile.ui.shared.theme.Blue
@@ -46,7 +50,7 @@ fun GoToRoomPage(
     getCurrentInventory: () -> UUID,
     onNavigateToRoomElements:() -> Unit
 ) {
-    val activity = (LocalContext.current as? Activity)
+    var displayModalQuitApp by remember { mutableStateOf(false) }
     setCurrentRoom(state)
 
     LaunchedEffect(Unit) {
@@ -56,7 +60,8 @@ fun GoToRoomPage(
     Column (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 50.dp),
+            .padding(top = 50.dp)
+            .blur(if (displayModalQuitApp) 10.dp else 0.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
@@ -64,7 +69,7 @@ fun GoToRoomPage(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().blur(if (displayModalQuitApp) 10.dp else 0.dp),
         contentAlignment = Alignment.Center
     )  {
         Column(
@@ -79,7 +84,7 @@ fun GoToRoomPage(
                     Row(modifier = Modifier.fillMaxWidth()){
                         Button(
                             text = stringResource(id = R.string.label_button_quit),
-                            onClick = { activity?.finish() },
+                            onClick = { displayModalQuitApp = true },
                             hasTwoRoundedCorners = true,
                             modifier = Modifier.width(200.dp),
                         )
@@ -153,7 +158,13 @@ fun GoToRoomPage(
             }
         }
     }
-    GraphicFooter()
+    GraphicFooter(modifier = Modifier.blur(if (displayModalQuitApp) 10.dp else 0.dp))
+    if (displayModalQuitApp){
+        QuitAppPopup(
+            onDismissRequest = { displayModalQuitApp = false },
+            onCancelClicked = { displayModalQuitApp = false }
+        )
+    }
 }
 
 
