@@ -41,6 +41,7 @@ android {
         properties.load(keystoreFile.inputStream())
 
         buildConfigField("String", "API_URL", "\"${properties.getProperty("API_URL")}\"")
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
     }
 
     buildTypes {
