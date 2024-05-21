@@ -10,6 +10,7 @@ val Pink40 = Color(0xFF7D5260)
 
 val Pink = Color(0xFFF23967)
 val PinkLight = Color(0x5CF23967)
+val PinkExtraLight = Color(0xFFE8DEF8)
 
 var Black = Color(0xFF363636)
 
