@@ -26,8 +26,6 @@ fun NavGraphBuilder.elementsNavigation(
     onNavigateToInventorySummary: () -> Unit,
     onNavigateToCurrentRoom: () -> Unit
 ) {
-    val inventoryId = currentInventoryViewModel.currentInventory.value
-
     composable(wallsRoute){
         val walls: ElementListState by wallsViewModel.walls.collectAsStateWithLifecycle()
 
@@ -45,8 +43,8 @@ fun NavGraphBuilder.elementsNavigation(
                 wallsViewModel.checkAll()
                 onNavigateToElements()
             },
-            fetchElements = { wallsViewModel.fetchWallList(inventoryId) },
-            fetchElement = { elementId: UUID -> wallsViewModel.fetchWall(inventoryId, elementId) },
+            fetchElements = { wallsViewModel.fetchWallList(currentInventoryViewModel.getCurrentInventory()) },
+            fetchElement = { elementId: UUID -> wallsViewModel.fetchWall(currentInventoryViewModel.getCurrentInventory(), elementId) },
             onNavigateToTakePicture = onNavigateToTakePicture
         )
     }
@@ -71,8 +69,8 @@ fun NavGraphBuilder.elementsNavigation(
                     onNavigateToCurrentRoom()
                 }
             },
-            fetchElements = { elementsViewModel.fetchElementList(inventoryId) },
-            fetchElement = { elementId: UUID -> elementsViewModel.fetchElement(inventoryId, elementId) },
+            fetchElements = { elementsViewModel.fetchElementList(currentInventoryViewModel.getCurrentInventory()) },
+            fetchElement = { elementId: UUID -> elementsViewModel.fetchElement(currentInventoryViewModel.getCurrentInventory(), elementId) },
             onNavigateToTakePicture = onNavigateToTakePicture
         )
     }
