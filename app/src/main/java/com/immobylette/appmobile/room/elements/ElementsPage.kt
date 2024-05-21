@@ -1,7 +1,6 @@
 package com.immobylette.appmobile.room.elements
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,7 +29,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +39,7 @@ import com.immobylette.appmobile.ui.shared.component.Chip
 import com.immobylette.appmobile.ui.shared.component.ChipRoomInfo
 import com.immobylette.appmobile.ui.shared.component.Element
 import com.immobylette.appmobile.ui.shared.component.PhotoDetail
+import com.immobylette.appmobile.ui.shared.component.QuitAppPopup
 import com.immobylette.appmobile.ui.shared.component.Title
 import com.immobylette.appmobile.ui.shared.component.TitleType
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
@@ -66,8 +65,8 @@ fun ElementsPage(
     onClickOnNext: () -> Unit,
     onNavigateToTakePicture: () -> Unit
 ){
-    val activity = (LocalContext.current as? Activity)
     var currentPhoto by remember { mutableStateOf(PhotoUrlDto()) }
+    var displayModalQuitApp by remember { mutableStateOf(false) }
     var displayModalCurrentPhoto by remember { mutableStateOf(false) }
     var displayModalConfirmCheckAll by remember { mutableStateOf(false) }
 
@@ -92,7 +91,7 @@ fun ElementsPage(
                         text = stringResource(id = R.string.label_button_quit),
                         style = MaterialTheme.typography.titleMedium,
                     ){
-                        activity?.finish()
+                        displayModalQuitApp = true
                     }
                     ChipRoomInfo(
                         nbChecked = getRoomNumber(),
@@ -200,6 +199,12 @@ fun ElementsPage(
                     }
                 )
             }
+        }
+        if (displayModalQuitApp){
+            QuitAppPopup(
+                onDismissRequest = { displayModalQuitApp = false },
+                onCancelClicked = { displayModalQuitApp = false }
+            )
         }
     }
 }
