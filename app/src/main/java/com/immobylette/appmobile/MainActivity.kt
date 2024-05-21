@@ -4,11 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
@@ -29,8 +24,10 @@ import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.room.current.CurrentRoomViewModel
+import com.immobylette.appmobile.room.elements.ElementsViewModel
 import com.immobylette.appmobile.room.elements.WallsViewModel
 import com.immobylette.appmobile.room.elements.elementsNavigation
+import com.immobylette.appmobile.room.elements.navigateToElements
 import com.immobylette.appmobile.room.elements.navigateToWalls
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
@@ -58,6 +55,7 @@ class MainActivity : ComponentActivity() {
             val confirmationViewModel by viewModels<ConfirmationViewModel>()
             val goToRoomViewModel by viewModels<GoToRoomViewModel>()
             val wallsViewModel by viewModels<WallsViewModel>()
+            val elementsViewModel by viewModels<ElementsViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -99,11 +97,15 @@ class MainActivity : ComponentActivity() {
 
                     elementsNavigation(
                         wallsViewModel = wallsViewModel,
+                        elementsViewModel = elementsViewModel,
                         currentRoomViewModel = currentRoomViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         currentElementViewModel = currentElementViewModel,
-                        onNavigateToTakePicture = navController::navigateToTakePicture
+                        onNavigateToTakePicture = navController::navigateToTakePicture,
+                        onNavigateToElements = navController::navigateToElements,
+                        onNavigateToInventorySummary = { },
+                        onNavigateToCurrentRoom = navController::navigateToGoToRoom
                     )
 
                     cameraNavigation(
