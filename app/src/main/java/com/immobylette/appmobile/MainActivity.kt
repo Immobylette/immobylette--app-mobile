@@ -4,11 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.immobylette.appmobile.agent.current.CurrentAgentViewModel
@@ -32,6 +27,7 @@ import com.immobylette.appmobile.room.current.CurrentRoomViewModel
 import com.immobylette.appmobile.room.elements.ElementsViewModel
 import com.immobylette.appmobile.room.elements.WallsViewModel
 import com.immobylette.appmobile.room.elements.elementsNavigation
+import com.immobylette.appmobile.room.elements.navigateToElements
 import com.immobylette.appmobile.room.elements.navigateToWalls
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
@@ -106,7 +102,10 @@ class MainActivity : ComponentActivity() {
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         currentElementViewModel = currentElementViewModel,
-                        onNavigateToTakePicture = navController::navigateToTakePicture
+                        onNavigateToTakePicture = navController::navigateToTakePicture,
+                        onNavigateToElements = navController::navigateToElements,
+                        onNavigateToInventorySummary = { },
+                        onNavigateToCurrentRoom = navController::navigateToGoToRoom
                     )
 
                     cameraNavigation(

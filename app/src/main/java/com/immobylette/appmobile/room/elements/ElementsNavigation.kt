@@ -22,6 +22,9 @@ fun NavGraphBuilder.elementsNavigation(
     currentInventoryViewModel: CurrentInventoryViewModel,
     currentElementViewModel: CurrentElementViewModel,
     onNavigateToTakePicture: () -> Unit,
+    onNavigateToElements: () -> Unit,
+    onNavigateToInventorySummary: () -> Unit,
+    onNavigateToCurrentRoom: () -> Unit
 ) {
     val inventoryId = currentInventoryViewModel.currentInventory.value
 
@@ -38,7 +41,10 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWindows = currentRoomViewModel::getNbWindows,
             onClickSameState = { element -> wallsViewModel.check(element.id, element.state)},
             setCurrentElement = currentElementViewModel::setCurrentElement,
-            onClickOnNext = wallsViewModel::checkAll,
+            onClickOnNext = {
+                wallsViewModel.checkAll()
+                onNavigateToElements()
+            },
             fetchElements = { wallsViewModel.fetchWallList(inventoryId) },
             fetchElement = { elementId: UUID -> wallsViewModel.fetchWall(inventoryId, elementId) },
             onNavigateToTakePicture = onNavigateToTakePicture
@@ -57,7 +63,14 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWindows = currentRoomViewModel::getNbWindows,
             onClickSameState = { element -> elementsViewModel.check(element.id, element.state)},
             setCurrentElement = currentElementViewModel::setCurrentElement,
-            onClickOnNext = elementsViewModel::checkAll,
+            onClickOnNext = {
+                elementsViewModel.checkAll()
+                if (currentRoomViewModel.getOrderNb() + 1 == currentPropertyViewModel.getNbRooms()) {
+                    onNavigateToInventorySummary()
+                } else {
+                    onNavigateToCurrentRoom()
+                }
+            },
             fetchElements = { elementsViewModel.fetchElementList(inventoryId) },
             fetchElement = { elementId: UUID -> elementsViewModel.fetchElement(inventoryId, elementId) },
             onNavigateToTakePicture = onNavigateToTakePicture
