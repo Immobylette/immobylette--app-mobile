@@ -44,6 +44,7 @@ import com.immobylette.appmobile.ui.shared.theme.PinkExtraLight
 @Composable
 fun Signature(
     name: String,
+    onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var signed by remember { mutableStateOf(false) }
@@ -78,6 +79,7 @@ fun Signature(
                 checked = signed,
                 onCheckedChange = {
                     signed = it
+                    onCheckedChange(it)
                 },
             )
         }
@@ -154,7 +156,8 @@ fun Switch(
 fun SignaturePreview(){
     ImmobyletteappmobileTheme {
         Signature(
-            name = "John Doe"
+            name = "John Doe",
+            onCheckedChange = {}
         )
     }
 }
