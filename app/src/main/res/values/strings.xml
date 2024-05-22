@@ -47,4 +47,5 @@
     <string name="label_description_popup_quit_app">Vos changements seront sauvegardés</string>
     <string name="label_is_about_to_sign">est sur le point de signer l\'état des lieux</string>
     <string name="label_switch_to_sign">Signer</string>
+    <string name="label_inventory_ending">État des lieux terminé !</string>
 </resources>
