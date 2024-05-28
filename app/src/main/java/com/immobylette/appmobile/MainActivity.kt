@@ -14,8 +14,13 @@ import com.immobylette.appmobile.confirmation.ConfirmationViewModel
 import com.immobylette.appmobile.confirmation.confirmationNavigation
 import com.immobylette.appmobile.confirmation.navigateToConfirmation
 import com.immobylette.appmobile.element.camera.cameraNavigation
+import com.immobylette.appmobile.element.camera.navigateToTakeAnotherPicture
 import com.immobylette.appmobile.element.camera.navigateToTakePicture
 import com.immobylette.appmobile.element.current.CurrentElementViewModel
+import com.immobylette.appmobile.ending.endingNavigation
+import com.immobylette.appmobile.element.newstep.NewStepViewModel
+import com.immobylette.appmobile.element.newstep.navigateToNewStep
+import com.immobylette.appmobile.element.newstep.newStepNavigation
 import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
@@ -53,6 +58,7 @@ class MainActivity : ComponentActivity() {
             val agentSelectionViewModel by viewModels<AgentSelectionViewModel>()
             val propertySelectionViewModel by viewModels<PropertySelectionViewModel>()
             val confirmationViewModel by viewModels<ConfirmationViewModel>()
+            val newStepViewModel by viewModels<NewStepViewModel>()
             val goToRoomViewModel by viewModels<GoToRoomViewModel>()
             val wallsViewModel by viewModels<WallsViewModel>()
             val elementsViewModel by viewModels<ElementsViewModel>()
@@ -102,6 +108,7 @@ class MainActivity : ComponentActivity() {
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         currentElementViewModel = currentElementViewModel,
+                        currentStepViewModel = currentStepViewModel,
                         onNavigateToTakePicture = navController::navigateToTakePicture,
                         onNavigateToElements = navController::navigateToElements,
                         onNavigateToInventorySummary = { },
@@ -111,8 +118,22 @@ class MainActivity : ComponentActivity() {
                     cameraNavigation(
                         currentStepViewModel = currentStepViewModel,
                         currentElementViewModel = currentElementViewModel,
-                        navigateToElementState = {},
+                        navigateToElementState = navController::navigateToNewStep,
                         onCancelClicked = { navController.navigateUp() }
+                    )
+
+                    newStepNavigation(
+                        newStepViewModel = newStepViewModel,
+                        currentElementViewModel = currentElementViewModel,
+                        currentStepViewModel = currentStepViewModel,
+                        currentInventoryViewModel = currentInventoryViewModel,
+                        navigateToTakeAnotherPicture = navController::navigateToTakeAnotherPicture,
+                        navigateToWalls = navController::navigateToWalls,
+                        navigateToElements = navController::navigateToElements
+                    )
+
+                    endingNavigation(
+                        onNavigateToWaitingFinished = navController::navigateToPropertySelection
                     )
                 }
             }

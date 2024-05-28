@@ -61,6 +61,7 @@ fun ElementsPage(
     fetchElements: () -> Unit,
     fetchElement: (UUID) -> Unit,
     setCurrentElement: (ElementState) -> Unit,
+    resetStep: (ElementStateEnum) -> Unit,
     onClickSameState: (ElementState) -> Unit,
     onClickOnNext: () -> Unit,
     onNavigateToTakePicture: () -> Unit
@@ -71,8 +72,7 @@ fun ElementsPage(
     var displayModalConfirmCheckAll by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        if (elements.elements.isEmpty())
-            fetchElements()
+        fetchElements()
     }
 
     Surface(
@@ -154,6 +154,7 @@ fun ElementsPage(
                                 error = false,
                                 onClickNewState = {
                                     setCurrentElement(element)
+                                    resetStep(element.state)
                                     onNavigateToTakePicture()
                                 },
                                 onClickSameState = { onClickSameState(element) },
@@ -405,7 +406,8 @@ fun ElementsPagePreview(){
             onNavigateToTakePicture = {},
             onClickSameState = {},
             onClickOnNext = {},
-            setCurrentElement = {}
+            setCurrentElement = {},
+            resetStep = {}
         )
     }
 }
