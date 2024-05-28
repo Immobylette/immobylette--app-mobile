@@ -16,9 +16,9 @@ import java.util.UUID
 class NewStepViewModel: ViewModel() {
     fun addStep(inventoryId: UUID, elementId: UUID, step: StepState, onStepAdded: () -> Unit) {
         viewModelScope.launch {
-            var gson = Gson()
+            val gson = Gson()
             val stepDto = step.toDto()
-            var stepJson = gson.toJson(stepDto).trimIndent()
+            val stepJson = gson.toJson(stepDto).trimIndent()
 
             val stepBody = stepJson.toRequestBody("application/json".toMediaTypeOrNull())
 
@@ -36,7 +36,6 @@ class NewStepViewModel: ViewModel() {
             } else {
                 Log.e("RequestError", "Error adding step")
             }
-            onStepAdded()
         }
     }
 }

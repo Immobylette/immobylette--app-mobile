@@ -34,7 +34,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -50,10 +49,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import coil.compose.rememberAsyncImagePainter
 import com.immobylette.appmobile.R
-import com.immobylette.appmobile.data.dto.PhotoUrlDto
 import com.immobylette.appmobile.data.enum.ElementState
 import com.immobylette.appmobile.data.model.Photo
-import com.immobylette.appmobile.step.StepState
 import com.immobylette.appmobile.ui.shared.component.Slider
 import com.immobylette.appmobile.ui.shared.theme.Black
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
@@ -128,7 +125,6 @@ fun NewStepPage(
                     contentDescription = stringResource(id = R.string.label_captured_photo),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .background(Color.Red)
                         .height(500.dp)
                         .fillMaxWidth()
                 )
