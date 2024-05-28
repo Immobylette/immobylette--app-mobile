@@ -16,6 +16,7 @@ import com.immobylette.appmobile.confirmation.navigateToConfirmation
 import com.immobylette.appmobile.element.camera.cameraNavigation
 import com.immobylette.appmobile.element.camera.navigateToTakePicture
 import com.immobylette.appmobile.element.current.CurrentElementViewModel
+import com.immobylette.appmobile.ending.endingNavigation
 import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
@@ -113,6 +114,10 @@ class MainActivity : ComponentActivity() {
                         currentElementViewModel = currentElementViewModel,
                         navigateToElementState = {},
                         onCancelClicked = { navController.navigateUp() }
+                    )
+
+                    endingNavigation(
+                        onNavigateToWaitingFinished = navController::navigateToPropertySelection
                     )
                 }
             }
