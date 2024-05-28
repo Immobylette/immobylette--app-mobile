@@ -131,7 +131,7 @@ class MainActivity : ComponentActivity() {
                         navigateToWalls = navController::navigateToWalls,
                         navigateToElements = navController::navigateToElements
                     )
-
+                    
                     endingNavigation(
                         onNavigateToWaitingFinished = navController::navigateToPropertySelection
                     )
