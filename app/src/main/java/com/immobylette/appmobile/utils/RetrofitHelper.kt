@@ -8,10 +8,23 @@ import retrofit2.converter.gson.GsonConverterFactory
 import com.immobylette.appmobile.BuildConfig
 import com.immobylette.appmobile.data.service.InventoryService
 import com.immobylette.appmobile.data.service.RoomService
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 
 object RetrofitHelper {
+    private val headerInterceptor = Interceptor { chain ->
+        val request = chain.request().newBuilder()
+            .addHeader("x-api-key", BuildConfig.API_KEY)
+            .build()
+        chain.proceed(request)
+    }
+
+    private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(headerInterceptor)
+        .build()
 
     private val retrofitClient: Retrofit = Retrofit.Builder()
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl(BuildConfig.API_URL)
         .build()
