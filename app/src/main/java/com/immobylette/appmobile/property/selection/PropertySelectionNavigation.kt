@@ -25,6 +25,7 @@ fun NavGraphBuilder.propertySelectionNavigation(
                 state = state,
                 fetchPropertyList = propertySelectionViewModel::fetchPropertyList,
                 fetchProperty = propertySelectionViewModel::fetchProperty,
+                clearPropertyList = propertySelectionViewModel::clearPropertyList,
                 saveCurrentProperty = currentPropertyViewModel::changeCurrentProperty,
                 onNavigateToChangeAgent = onNavigateToChangeAgent,
                 onNavigateToPropertySelected = onNavigateToPropertySelected

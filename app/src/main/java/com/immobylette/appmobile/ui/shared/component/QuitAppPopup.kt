@@ -1,7 +1,6 @@
 package com.immobylette.appmobile.ui.shared.component
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.compose.material3.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,7 +13,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,10 +30,9 @@ import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 fun QuitAppPopup(
     onDismissRequest: () -> Unit,
     onCancelClicked: () -> Unit,
+    onQuitClicked: () -> Unit,
     modifier : Modifier = Modifier
 ) {
-    val activity = (LocalContext.current as? Activity)
-
     AlertDialog(
         onDismissRequest = onDismissRequest,
     ) {
@@ -59,7 +56,7 @@ fun QuitAppPopup(
                         text = stringResource(id = R.string.label_button_confirm),
                         modifier = Modifier.width(150.dp)
                     ) {
-                        activity?.finish()
+                        onQuitClicked()
                     }
                 }
             }
@@ -90,6 +87,7 @@ fun QuitAppPopupPreview(){
         QuitAppPopup(
             onDismissRequest = {},
             onCancelClicked = {},
+            onQuitClicked = {}
         )
     }
 }

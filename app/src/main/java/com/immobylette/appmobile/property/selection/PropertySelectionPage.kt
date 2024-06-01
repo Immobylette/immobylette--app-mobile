@@ -36,6 +36,7 @@ fun PropertySelectionPage (
     state: PropertyListState,
     fetchPropertyList: () -> Unit,
     fetchProperty: (UUID) -> Unit,
+    clearPropertyList: () -> Unit,
     saveCurrentProperty: (PropertyState) -> Unit,
     onNavigateToChangeAgent: () -> Unit,
     onNavigateToPropertySelected: () -> Unit
@@ -65,6 +66,10 @@ fun PropertySelectionPage (
         } else {
             Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    LaunchedEffect(Unit) {
+        clearPropertyList()
     }
 
     LaunchedEffect(reachedBottom) {

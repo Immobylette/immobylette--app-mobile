@@ -15,6 +15,7 @@ fun NavGraphBuilder.confirmationNavigation(
     currentInventoryViewModel: CurrentInventoryViewModel,
     currentAgentViewModel: CurrentAgentViewModel,
     onNavigateToConfirmed: () -> Unit,
+    onNavigateToPropertySelection: () -> Unit
 ) {
     composable(confirmationRoute) {
         ConfirmationPage (
@@ -33,7 +34,8 @@ fun NavGraphBuilder.confirmationNavigation(
 
                 }
             },
-            getTenant = currentPropertyViewModel::getTenant
+            getTenant = currentPropertyViewModel::getTenant,
+            onNavigateToPropertySelection = onNavigateToPropertySelection
         )
     }
 }
