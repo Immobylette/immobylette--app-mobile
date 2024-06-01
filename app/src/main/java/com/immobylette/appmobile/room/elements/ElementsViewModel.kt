@@ -57,7 +57,6 @@ class ElementsViewModel: ViewModel() {
                                     photo = wall.photo,
                                     basePhotos = wall.basePhotos,
                                     previousPhotos = wall.previousPhotos,
-                                    step = wall.step,
                                     state = element.state,
                                     checked = element.checked,
                                     nbBasePhotos = element.nbBasePhotos,
