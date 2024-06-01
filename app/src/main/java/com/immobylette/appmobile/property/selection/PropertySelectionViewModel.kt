@@ -82,4 +82,8 @@ class PropertySelectionViewModel: ViewModel() {
             }
         }
     }
+
+    fun clearPropertyList() {
+        _state.value = PropertyListState()
+    }
 }

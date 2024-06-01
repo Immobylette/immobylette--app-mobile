@@ -48,7 +48,8 @@ fun GoToRoomPage(
     fetchCurrentRoom: (id: UUID) -> Unit,
     setCurrentRoom: (room: RoomState) -> Unit,
     getCurrentInventory: () -> UUID,
-    onNavigateToRoomElements:() -> Unit
+    onNavigateToRoomElements:() -> Unit,
+    onNavigateToPropertySelection: () -> Unit
 ) {
     var displayModalQuitApp by remember { mutableStateOf(false) }
     setCurrentRoom(state)
@@ -162,7 +163,8 @@ fun GoToRoomPage(
     if (displayModalQuitApp){
         QuitAppPopup(
             onDismissRequest = { displayModalQuitApp = false },
-            onCancelClicked = { displayModalQuitApp = false }
+            onCancelClicked = { displayModalQuitApp = false },
+            onQuitClicked = onNavigateToPropertySelection
         )
     }
 }
