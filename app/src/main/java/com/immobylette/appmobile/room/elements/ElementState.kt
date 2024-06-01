@@ -19,5 +19,4 @@ data class ElementState(
     val previousPhotos: List<PhotoUrlDto> = listOf(),
     val state: ElementStateEnum = ElementStateEnum.NEW,
     val checked: Boolean = false,
-    val step: StepState = StepState()
 )
