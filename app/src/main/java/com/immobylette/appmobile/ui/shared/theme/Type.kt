@@ -50,6 +50,14 @@ val Typography = Typography(
         letterSpacing = 0.5.sp,
         color = Black
     ),
+    bodySmall = TextStyle(
+        fontFamily = fredokaFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp,
+        color = Black
+    ),
     headlineSmall = TextStyle(
         fontFamily = fredokaFontFamily,
         fontSize = 20.sp,
@@ -58,6 +66,14 @@ val Typography = Typography(
     ),
     displayMedium = TextStyle(
         fontFamily = interFontFamily
+    ),
+    labelMedium = TextStyle(
+        fontFamily = fredokaFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp,
+        color = Black
     ),
     labelSmall = TextStyle(
         fontFamily = fredokaFontFamily,

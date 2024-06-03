@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -33,50 +34,54 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import coil.compose.rememberAsyncImagePainter
+import com.immobylette.appmobile.data.model.Photo
 import com.immobylette.appmobile.ui.shared.theme.BlueLight
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
-import java.net.URL
+import java.io.File
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ListAdditionalPhotos(
-    photos: List<URL>,
-    onDeletePhoto: (URL) -> Unit,
+    photos: List<Photo>,
+    onDeletePhoto: (Int) -> Unit,
     onAddPhoto: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Row (
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp),
+            .height(150.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         LazyRow (
             modifier = Modifier.fillMaxHeight(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            items(photos){ photo ->
+            itemsIndexed(photos){ index, photo ->
                 Scaffold (
                     topBar = {
-                        Row (
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(5.dp),
-                        ) {
-                            ListAdditionalPhotosButton(
-                                icon = Icons.Rounded.Close,
-                                onClick = { onDeletePhoto(photo) },
-                                modifier = Modifier.size(20.dp)
-                            )
+                        if(photos.size > 1) {
+                            Row (
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(5.dp),
+                            ) {
+                                ListAdditionalPhotosButton(
+                                    icon = Icons.Rounded.Close,
+                                    onClick = { onDeletePhoto(index) },
+                                    modifier = Modifier.size(30.dp)
+                                )
+                            }
                         }
                     },
                     modifier = Modifier
-                        .width(120.dp)
+                        .width(160.dp)
                         .fillMaxHeight()
                 ) {
                     Image(
-                        painter = rememberAsyncImagePainter(photo.toString()),
+                        painter = rememberAsyncImagePainter(photo!!.file!!.toUri()),
                         contentScale = ContentScale.Crop,
                         contentDescription = "",
                         modifier = Modifier
@@ -85,7 +90,7 @@ fun ListAdditionalPhotos(
                             .aspectRatio(1f)
                     )
                 }
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(12.dp))
             }
             item {
                 ListAdditionalPhotosButton(
@@ -129,16 +134,19 @@ fun ListAdditionalPhotosButton(
 fun ListAdditionalPhotosPreview(){
     ImmobyletteappmobileTheme {
         ListAdditionalPhotos(
-            photos = listOf(
-                URL("https://picsum.photos/200/300"),
-                URL("https://picsum.photos/200/300"),
-                URL("https://picsum.photos/200/300"),
-                URL("https://picsum.photos/200/300"),
-                URL("https://picsum.photos/200/300"),
-                URL("https://picsum.photos/200/300"),
-//                URL("https://picsum.photos/200/300"),
-//                URL("https://picsum.photos/200/300"),
-//                URL("https://picsum.photos/200/300"),
+            photos = mutableListOf(
+                Photo(
+                    description = "Test",
+                    file = File("fregregr")
+                ),
+                Photo(
+                    description = "Test",
+                    file = File("fregregr")
+                ),
+                Photo(
+                    description = "Test",
+                    file = File("fregregr")
+                ),
             ),
             onDeletePhoto = {},
             onAddPhoto = {}

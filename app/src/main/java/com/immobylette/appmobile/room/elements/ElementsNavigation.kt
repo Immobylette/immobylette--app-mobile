@@ -9,6 +9,7 @@ import com.immobylette.appmobile.element.current.CurrentElementViewModel
 import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
 import com.immobylette.appmobile.room.current.CurrentRoomViewModel
+import com.immobylette.appmobile.step.current.CurrentStepViewModel
 import java.util.UUID
 
 const val wallsRoute = "walls"
@@ -21,6 +22,7 @@ fun NavGraphBuilder.elementsNavigation(
     currentPropertyViewModel: CurrentPropertyViewModel,
     currentInventoryViewModel: CurrentInventoryViewModel,
     currentElementViewModel: CurrentElementViewModel,
+    currentStepViewModel: CurrentStepViewModel,
     onNavigateToTakePicture: () -> Unit,
     onNavigateToElements: () -> Unit,
     onNavigateToInventorySummary: () -> Unit,
@@ -40,6 +42,7 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWindows = currentRoomViewModel::getNbWindows,
             onClickSameState = { element -> wallsViewModel.check(element.id, element.state)},
             setCurrentElement = currentElementViewModel::setCurrentElement,
+            resetStep = { state -> currentStepViewModel.resetStepWithStateAndIsWall(state, true) },
             onClickOnNext = {
                 wallsViewModel.checkAll()
                 onNavigateToElements()
@@ -63,6 +66,7 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWindows = currentRoomViewModel::getNbWindows,
             onClickSameState = { element -> elementsViewModel.check(element.id, element.state)},
             setCurrentElement = currentElementViewModel::setCurrentElement,
+            resetStep = { state -> currentStepViewModel.resetStepWithStateAndIsWall(state, false) },
             onClickOnNext = {
                 elementsViewModel.checkAll()
                 if (currentRoomViewModel.getOrderNb() + 1 == currentPropertyViewModel.getNbRooms()) {
