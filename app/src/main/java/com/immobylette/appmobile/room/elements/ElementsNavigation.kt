@@ -40,11 +40,11 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWalls = currentRoomViewModel::getNbWalls,
             getNbDoors = currentRoomViewModel::getNbDoors,
             getNbWindows = currentRoomViewModel::getNbWindows,
-            onClickSameState = { element -> wallsViewModel.check(element.id, element.state)},
+            onClickSameState = { element -> wallsViewModel.check(element.id, element.state, currentInventoryViewModel.getCurrentInventory())},
             setCurrentElement = currentElementViewModel::setCurrentElement,
             resetStep = { state -> currentStepViewModel.resetStepWithStateAndIsWall(state, true) },
             onClickOnNext = {
-                wallsViewModel.checkAll()
+                wallsViewModel.checkAll(currentInventoryViewModel.getCurrentInventory())
                 onNavigateToElements()
             },
             fetchElements = { wallsViewModel.fetchWallList(currentInventoryViewModel.getCurrentInventory()) },

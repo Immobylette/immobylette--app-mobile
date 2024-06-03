@@ -14,6 +14,6 @@ data class PropertyState(
     val address: AddressDto? = null,
     val currentInventory: Boolean = false,
     val currentInventoryId: UUID? = null,
-    val photo: URL = URL("http://placekitten.com/200/300"), //TODO: Modify when the backend will retrieve photos
+    val photo: URL = URL("http://placekitten.com/200/300"),
     val distance: Float = 0f
 )

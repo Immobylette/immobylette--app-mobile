@@ -60,7 +60,8 @@ class ElementsViewModel: ViewModel() {
                                     state = element.state,
                                     checked = element.checked,
                                     nbBasePhotos = element.nbBasePhotos,
-                                    nbPreviousPhotos = element.nbPreviousPhotos
+                                    nbPreviousPhotos = element.nbPreviousPhotos,
+                                    fetched = true
                                 )
                             } else {
                                 element

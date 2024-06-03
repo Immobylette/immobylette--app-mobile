@@ -11,7 +11,7 @@ data class ElementState(
     val name: String = "",
     val description: String? = "",
     val type: String = "",
-    val photo: URL = URL("http://placekitten.com/200/300"), //TODO: Modify when the backend will retrieve photos,
+    val photo: URL = URL("http://placekitten.com/200/300"),
     val attributes: Map<String, String> = mapOf(),
     val nbBasePhotos: Int = 0,
     val nbPreviousPhotos: Int = 0,
@@ -19,4 +19,5 @@ data class ElementState(
     val previousPhotos: List<PhotoUrlDto> = listOf(),
     val state: ElementStateEnum = ElementStateEnum.NEW,
     val checked: Boolean = false,
+    val fetched: Boolean = false
 )
