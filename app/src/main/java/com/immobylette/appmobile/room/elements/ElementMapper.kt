@@ -13,7 +13,8 @@ fun ElementSummaryDto.toState() = ElementState(
     nbBasePhotos = nbBasePhotos,
     nbPreviousPhotos = nbPreviousPhotos,
     state = ElementStateEnum.from(state) ?: ElementStateEnum.NEW,
-    checked = checked
+    checked = checked,
+    photo = photo
 )
 
 fun ElementDto.toState() = ElementState(
@@ -24,4 +25,5 @@ fun ElementDto.toState() = ElementState(
     attributes = attributes,
     basePhotos = basePhotos,
     previousPhotos = previousPhotos,
+    photo = photo
 )

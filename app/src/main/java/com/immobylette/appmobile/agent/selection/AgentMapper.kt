@@ -7,5 +7,5 @@ fun ThirdPartyDto.toAgentState() = AgentState(
     id = id,
     name = name,
     surname = surname,
-    photo = URL("https://picsum.photos/200/300")
+    photo = URL(photo)
 )
