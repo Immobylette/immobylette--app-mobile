@@ -64,7 +64,8 @@ fun ElementsPage(
     resetStep: (ElementStateEnum) -> Unit,
     onClickSameState: (ElementState) -> Unit,
     onClickOnNext: () -> Unit,
-    onNavigateToTakePicture: () -> Unit
+    onNavigateToTakePicture: () -> Unit,
+    onNavigateToPropertySelection: () -> Unit
 ){
     var currentPhoto by remember { mutableStateOf(PhotoUrlDto()) }
     var displayModalQuitApp by remember { mutableStateOf(false) }
@@ -204,7 +205,8 @@ fun ElementsPage(
         if (displayModalQuitApp){
             QuitAppPopup(
                 onDismissRequest = { displayModalQuitApp = false },
-                onCancelClicked = { displayModalQuitApp = false }
+                onCancelClicked = { displayModalQuitApp = false },
+                onQuitClicked = onNavigateToPropertySelection
             )
         }
     }
@@ -407,7 +409,8 @@ fun ElementsPagePreview(){
             onClickSameState = {},
             onClickOnNext = {},
             setCurrentElement = {},
-            resetStep = {}
+            resetStep = {},
+            onNavigateToPropertySelection = {}
         )
     }
 }

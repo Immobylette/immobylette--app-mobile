@@ -26,7 +26,8 @@ fun NavGraphBuilder.elementsNavigation(
     onNavigateToTakePicture: () -> Unit,
     onNavigateToElements: () -> Unit,
     onNavigateToInventorySummary: () -> Unit,
-    onNavigateToCurrentRoom: () -> Unit
+    onNavigateToCurrentRoom: () -> Unit,
+    onNavigateToPropertySelection: () -> Unit
 ) {
     composable(wallsRoute){
         val walls: ElementListState by wallsViewModel.walls.collectAsStateWithLifecycle()
@@ -48,7 +49,8 @@ fun NavGraphBuilder.elementsNavigation(
             },
             fetchElements = { wallsViewModel.fetchWallList(currentInventoryViewModel.getCurrentInventory()) },
             fetchElement = { elementId: UUID -> wallsViewModel.fetchWall(currentInventoryViewModel.getCurrentInventory(), elementId) },
-            onNavigateToTakePicture = onNavigateToTakePicture
+            onNavigateToTakePicture = onNavigateToTakePicture,
+            onNavigateToPropertySelection = onNavigateToPropertySelection
         )
     }
 
@@ -75,7 +77,8 @@ fun NavGraphBuilder.elementsNavigation(
             },
             fetchElements = { elementsViewModel.fetchElementList(currentInventoryViewModel.getCurrentInventory()) },
             fetchElement = { elementId: UUID -> elementsViewModel.fetchElement(currentInventoryViewModel.getCurrentInventory(), elementId) },
-            onNavigateToTakePicture = onNavigateToTakePicture
+            onNavigateToTakePicture = onNavigateToTakePicture,
+            onNavigateToPropertySelection = onNavigateToPropertySelection
         )
     }
 }

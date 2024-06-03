@@ -24,5 +24,4 @@ fun ElementDto.toState() = ElementState(
     attributes = attributes,
     basePhotos = basePhotos,
     previousPhotos = previousPhotos,
-    step = step.toState()
 )

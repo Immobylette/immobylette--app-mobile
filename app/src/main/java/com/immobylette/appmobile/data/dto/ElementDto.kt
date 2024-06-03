@@ -17,6 +17,4 @@ data class ElementDto(
 
     @SerializedName("previous_photos")
     val previousPhotos: List<PhotoUrlDto>,
-
-    val step: StepDto
 )

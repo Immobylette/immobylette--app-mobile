@@ -91,14 +91,16 @@ class MainActivity : ComponentActivity() {
                         currentPropertyViewModel = currentPropertyViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         currentAgentViewModel = currentAgentViewModel,
-                        onNavigateToConfirmed = navController::navigateToGoToRoom
+                        onNavigateToConfirmed = navController::navigateToGoToRoom,
+                        onNavigateToPropertySelection = navController::navigateToPropertySelection
                     )
 
                     goToRoomNavigation(
                         goToRoomViewModel = goToRoomViewModel,
                         currentRoomViewModel = currentRoomViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
-                        onNavigateToRoomElements = navController::navigateToWalls
+                        onNavigateToRoomElements = navController::navigateToWalls,
+                        onNavigateToPropertySelection = navController::navigateToPropertySelection
                     )
 
                     elementsNavigation(
@@ -112,7 +114,8 @@ class MainActivity : ComponentActivity() {
                         onNavigateToTakePicture = navController::navigateToTakePicture,
                         onNavigateToElements = navController::navigateToElements,
                         onNavigateToInventorySummary = { },
-                        onNavigateToCurrentRoom = navController::navigateToGoToRoom
+                        onNavigateToCurrentRoom = navController::navigateToGoToRoom,
+                        onNavigateToPropertySelection = navController::navigateToPropertySelection
                     )
 
                     cameraNavigation(

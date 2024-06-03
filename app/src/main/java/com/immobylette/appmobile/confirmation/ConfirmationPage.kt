@@ -38,6 +38,7 @@ import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 @Composable
 fun ConfirmationPage(
     onNavigateToConfirmed: () -> Unit,
+    onNavigateToPropertySelection: () -> Unit,
     getTenant: () -> String?
 ) {
     val currentTenant = getTenant()
@@ -107,6 +108,7 @@ fun ConfirmationPage(
             QuitAppPopup(
                 onDismissRequest = { displayModalQuitApp = false },
                 onCancelClicked = { displayModalQuitApp = false },
+                onQuitClicked = onNavigateToPropertySelection
             )
         }
     }
@@ -122,7 +124,8 @@ fun ConfirmationPagePreview(){
 
       ConfirmationPage(
           onNavigateToConfirmed = {},
-          getTenant = { currentTenant }
+          onNavigateToPropertySelection = {},
+          getTenant = { currentTenant },
       )
     }
 
