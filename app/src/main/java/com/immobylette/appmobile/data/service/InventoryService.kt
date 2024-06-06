@@ -38,4 +38,10 @@ interface InventoryService {
         @Part("step") step: RequestBody,
         @Part photos: List<MultipartBody.Part>,
     ): Response<Unit>
+
+    @POST("inventories/{inventoryId}/elements/{elementId}/same")
+    suspend fun postSameElementStep(
+        @Path("inventoryId") inventoryId: UUID,
+        @Path("elementId") elementId: UUID
+    ): Response<Unit>
 }

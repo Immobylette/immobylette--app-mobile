@@ -3,21 +3,14 @@ package com.immobylette.appmobile.room.elements
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
-import com.immobylette.appmobile.data.dto.StepSentDto
 import com.immobylette.appmobile.utils.RetrofitHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.UUID
 import com.immobylette.appmobile.data.enum.ElementState as ElementStateEnum
-import kotlin.io.path.createTempFile
 
 class WallsViewModel: ViewModel() {
 
@@ -83,50 +76,18 @@ class WallsViewModel: ViewModel() {
     }
 
 
-    fun check(id: UUID, state: ElementStateEnum, inventoryId: UUID) {
-
+    fun check(elementId: UUID, state: ElementStateEnum, inventoryId: UUID) {
             viewModelScope.launch {
-                val element: ElementState =
-                    _walls.value.elements.find { element -> element.id == id }!!
-
-                val photoDescriptions = element.previousPhotos.map { photo -> photo.description ?: "" }
-
-                val stepDto = StepSentDto(null, null, element.state, photoDescriptions)
-
-                val files = element.previousPhotos.map { photo ->
-                        val inputStream = photo.url.openStream()
-
-                        val tempFile = createTempFile().toFile()
-
-                        tempFile.outputStream().use { fileOutput ->
-                            inputStream.copyTo(fileOutput)
-                        }
-
-                        tempFile
-                }
-
-                val gson = Gson()
-                val stepJson = gson.toJson(stepDto).trimIndent()
-
-                val stepBody = stepJson.toRequestBody("application/json".toMediaTypeOrNull())
-
-                val fileParts = files.map { file ->
-                    val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                    MultipartBody.Part.createFormData("photos", file.name, requestFile)
-                }
-
-                val result = RetrofitHelper.inventoryService.postElementStep(
+                val result = RetrofitHelper.inventoryService.postSameElementStep(
                     inventoryId,
-                    element.id,
-                    stepBody,
-                    fileParts
+                    elementId
                 )
 
                 if (result.isSuccessful) {
                     _walls.update { current ->
                         current.copy(
                             elements = current.elements.map { element ->
-                                if (element.id == id) {
+                                if (element.id == elementId) {
                                     element.copy(state = state, checked = true)
                                 } else {
                                     element
@@ -135,7 +96,7 @@ class WallsViewModel: ViewModel() {
                         )
                     }
                 } else {
-                    Log.e("RequestError", "Error adding step")
+                    Log.e("RequestError", "Error adding same step")
                 }
             }
     }
