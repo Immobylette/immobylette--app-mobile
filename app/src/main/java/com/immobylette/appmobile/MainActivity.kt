@@ -26,6 +26,9 @@ import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
 import com.immobylette.appmobile.property.selection.PropertySelectionViewModel
 import com.immobylette.appmobile.inventory.current.CurrentInventoryViewModel
+import com.immobylette.appmobile.inventory.summary.InventorySummaryViewModel
+import com.immobylette.appmobile.inventory.summary.inventorySummaryNavigation
+import com.immobylette.appmobile.inventory.summary.navigateToInventorySummary
 import com.immobylette.appmobile.property.selection.navigateToPropertySelection
 import com.immobylette.appmobile.property.selection.propertySelectionNavigation
 import com.immobylette.appmobile.room.current.CurrentRoomViewModel
@@ -62,6 +65,7 @@ class MainActivity : ComponentActivity() {
             val goToRoomViewModel by viewModels<GoToRoomViewModel>()
             val wallsViewModel by viewModels<WallsViewModel>()
             val elementsViewModel by viewModels<ElementsViewModel>()
+            val inventorySummaryViewModel by viewModels<InventorySummaryViewModel>()
             val navController = rememberNavController()
 
             ImmobyletteappmobileTheme {
@@ -113,7 +117,7 @@ class MainActivity : ComponentActivity() {
                         currentStepViewModel = currentStepViewModel,
                         onNavigateToTakePicture = navController::navigateToTakePicture,
                         onNavigateToElements = navController::navigateToElements,
-                        onNavigateToInventorySummary = { },
+                        onNavigateToInventorySummary = navController::navigateToInventorySummary,
                         onNavigateToCurrentRoom = navController::navigateToGoToRoom,
                         onNavigateToPropertySelection = navController::navigateToPropertySelection
                     )
@@ -133,6 +137,13 @@ class MainActivity : ComponentActivity() {
                         navigateToTakeAnotherPicture = navController::navigateToTakeAnotherPicture,
                         navigateToWalls = navController::navigateToWalls,
                         navigateToElements = navController::navigateToElements
+                    )
+
+                    inventorySummaryNavigation(
+                        currentInventoryViewModel = currentInventoryViewModel,
+                        inventorySummaryViewModel = inventorySummaryViewModel,
+                        onNavigateToPropertySelection = navController::navigateToPropertySelection,
+                        onNavigateToSignature = {}
                     )
                     
                     endingNavigation(
