@@ -167,7 +167,9 @@ fun ElementsPage(
                                     // Fetch element if not already fetched
                                     if (element.nbBasePhotos == 0 && element.nbPreviousPhotos == 0)
                                         fetchElement(element.id)
-                                }
+                                },
+                                nbBasePhotos = element.nbBasePhotos,
+                                nbPreviousPhotos = element.nbPreviousPhotos
                             )
                             Spacer(modifier = Modifier.height(15.dp))
                         }
