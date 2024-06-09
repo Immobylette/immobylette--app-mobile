@@ -41,11 +41,9 @@ import com.immobylette.appmobile.room.elements.navigateToWalls
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
-import com.immobylette.appmobile.signature.agent.navigateToAgentSignature
-import com.immobylette.appmobile.signature.agent.signatureAgentNavigation
+import com.immobylette.appmobile.signature.signatureAgentNavigation
 import com.immobylette.appmobile.signature.current.CurrentSignatureViewModel
-import com.immobylette.appmobile.signature.tenant.navigateToTenantSignature
-import com.immobylette.appmobile.signature.tenant.signatureTenantNavigation
+import com.immobylette.appmobile.signature.navigateToTenantSignature
 import com.immobylette.appmobile.step.current.CurrentStepViewModel
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
@@ -149,12 +147,8 @@ class MainActivity : ComponentActivity() {
                     signatureAgentNavigation(
                         currentSignatureViewModel = currentSignatureViewModel,
                         currentAgentViewModel = currentAgentViewModel,
-                        onNavigateToSignatureTenant = navController::navigateToTenantSignature
-                    )
-
-                    signatureTenantNavigation(
-                        currentSignatureViewModel = currentSignatureViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
+                        onNavigateToSignatureTenant = navController::navigateToTenantSignature,
                         onNavigateToEndingPage = navController::navigateToEndingPage
                     )
 
