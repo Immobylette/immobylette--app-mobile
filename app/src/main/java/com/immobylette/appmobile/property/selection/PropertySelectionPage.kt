@@ -108,7 +108,7 @@ fun PropertySelectionPage (
                         nbRooms =  property.nbRooms,
                         propertyType = property.propertyType,
                         propertyClass = property.propertyClass,
-                        owner = property.owner,
+                        owner = property.owner.name,
                         photoUrl = property.photo,
                         distance = property.distance,
                         inProgress = property.currentInventory,

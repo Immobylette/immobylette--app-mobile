@@ -12,7 +12,7 @@ class CurrentStepViewModel: ViewModel() {
     val currentStep: State<StepState> get() = _currentStep
 
     fun getStep(): StepState {
-        return _currentStep.value;
+        return _currentStep.value
     }
 
     fun getState(): ElementState {
@@ -25,7 +25,7 @@ class CurrentStepViewModel: ViewModel() {
         _currentStep.value = StepState(state = state, isWall = isWall)
     }
     fun changeState(state: ElementState) {
-        _currentStep.value = currentStep.value.copy(state = state);
+        _currentStep.value = currentStep.value.copy(state = state)
     }
 
     fun changeDescription(description: String) {

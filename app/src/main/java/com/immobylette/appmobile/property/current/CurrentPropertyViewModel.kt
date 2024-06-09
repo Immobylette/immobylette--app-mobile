@@ -3,6 +3,7 @@ package com.immobylette.appmobile.property.current
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
+import com.immobylette.appmobile.data.dto.ThirdPartyDto
 import com.immobylette.appmobile.property.selection.PropertyState
 import java.util.UUID
 
@@ -14,7 +15,7 @@ class CurrentPropertyViewModel: ViewModel() {
         _currentProperty.value = property
     }
 
-    fun getTenant(): String? {
+    fun getTenant(): ThirdPartyDto? {
         return _currentProperty.value.currentTenant
     }
 
@@ -27,6 +28,6 @@ class CurrentPropertyViewModel: ViewModel() {
     }
 
     fun getNbRooms(): Int {
-        return _currentProperty.value.nbRooms;
+        return _currentProperty.value.nbRooms
     }
 }

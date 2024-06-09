@@ -11,13 +11,13 @@ class CurrentElementViewModel: ViewModel() {
     val currentElement: State<ElementState> get() = _currentElement
 
     fun getId(): UUID {
-        return _currentElement.value.id;
+        return _currentElement.value.id
     }
     fun getName(): String {
-        return _currentElement.value.name;
+        return _currentElement.value.name
     }
     fun getDescription(): String? {
-        return _currentElement.value.description;
+        return _currentElement.value.description
     }
 
     fun setCurrentElement(element: ElementState) {
