@@ -40,11 +40,11 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWalls = currentRoomViewModel::getNbWalls,
             getNbDoors = currentRoomViewModel::getNbDoors,
             getNbWindows = currentRoomViewModel::getNbWindows,
-            onClickSameState = { element -> wallsViewModel.check(element.id, element.state)},
+            onClickSameState = { element -> wallsViewModel.check(element.id, element.state, currentInventoryViewModel.getCurrentInventory())},
             setCurrentElement = currentElementViewModel::setCurrentElement,
             resetStep = { state -> currentStepViewModel.resetStepWithStateAndIsWall(state, true) },
             onClickOnNext = {
-                wallsViewModel.checkAll()
+                wallsViewModel.checkAll(currentInventoryViewModel.getCurrentInventory())
                 onNavigateToElements()
             },
             fetchElements = { wallsViewModel.fetchWallList(currentInventoryViewModel.getCurrentInventory()) },
@@ -64,11 +64,11 @@ fun NavGraphBuilder.elementsNavigation(
             getNbWalls = currentRoomViewModel::getNbWalls,
             getNbDoors = currentRoomViewModel::getNbDoors,
             getNbWindows = currentRoomViewModel::getNbWindows,
-            onClickSameState = { element -> elementsViewModel.check(element.id, element.state)},
+            onClickSameState = { element -> elementsViewModel.check(element.id, element.state, currentInventoryViewModel.getCurrentInventory())},
             setCurrentElement = currentElementViewModel::setCurrentElement,
             resetStep = { state -> currentStepViewModel.resetStepWithStateAndIsWall(state, false) },
             onClickOnNext = {
-                elementsViewModel.checkAll()
+                elementsViewModel.checkAll(currentInventoryViewModel.getCurrentInventory())
                 if (currentRoomViewModel.getOrderNb() + 1 == currentPropertyViewModel.getNbRooms()) {
                     onNavigateToInventorySummary()
                 } else {
