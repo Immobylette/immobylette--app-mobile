@@ -42,4 +42,10 @@ interface InventoryService {
 
     @GET("/inventories/{id}/summary")
     suspend fun getSummary(@Path("id") id: UUID): Response<InventorySummaryDto>
+
+    @POST("inventories/{inventoryId}/elements/{elementId}/same")
+    suspend fun postSameElementStep(
+        @Path("inventoryId") inventoryId: UUID,
+        @Path("elementId") elementId: UUID
+    ): Response<Unit>
 }
