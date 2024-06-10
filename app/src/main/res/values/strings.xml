@@ -54,4 +54,9 @@
     <string name="label_is_about_to_sign">est sur le point de signer l\'état des lieux</string>
     <string name="label_switch_to_sign">Signer</string>
     <string name="label_inventory_ending">État des lieux terminé !</string>
+    <string name="label_summary_title">Vous êtes sur le point de confirmer l’état des lieux</string>
+    <string name="label_summary_nb_rooms">Nb de pièces vérifiées</string>
+    <string name="label_summary_nb_photos">Nb de photos prises</string>
+    <string name="label_summary_date">Date</string>
+    <string name="label_inventory_summary_title">Résumé de l\'état des lieux</string>
 </resources>

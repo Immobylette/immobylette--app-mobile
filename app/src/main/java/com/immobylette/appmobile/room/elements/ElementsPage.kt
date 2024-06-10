@@ -165,7 +165,8 @@ fun ElementsPage(
                                 },
                                 onExpanded = {
                                     // Fetch element if not already fetched
-                                    if (element.nbBasePhotos == 0 || element.nbPreviousPhotos == 0)
+
+                                    if (!element.fetched)
                                         fetchElement(element.id)
                                 },
                                 nbBasePhotos = element.nbBasePhotos,

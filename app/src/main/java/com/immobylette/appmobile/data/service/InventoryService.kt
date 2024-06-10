@@ -3,6 +3,7 @@ package com.immobylette.appmobile.data.service
 import com.immobylette.appmobile.data.dto.AgentDto
 import com.immobylette.appmobile.data.dto.ElementDto
 import com.immobylette.appmobile.data.dto.ElementSummaryDto
+import com.immobylette.appmobile.data.dto.InventorySummaryDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -37,5 +38,14 @@ interface InventoryService {
         @Path("elementId") elementId: UUID,
         @Part("step") step: RequestBody,
         @Part photos: List<MultipartBody.Part>,
+    ): Response<Unit>
+
+    @GET("/inventories/{id}/summary")
+    suspend fun getSummary(@Path("id") id: UUID): Response<InventorySummaryDto>
+
+    @POST("inventories/{inventoryId}/elements/{elementId}/same")
+    suspend fun postSameElementStep(
+        @Path("inventoryId") inventoryId: UUID,
+        @Path("elementId") elementId: UUID
     ): Response<Unit>
 }

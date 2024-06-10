@@ -60,7 +60,8 @@ class WallsViewModel: ViewModel() {
                                     state = element.state,
                                     checked = element.checked,
                                     nbBasePhotos = element.nbBasePhotos,
-                                    nbPreviousPhotos = element.nbPreviousPhotos
+                                    nbPreviousPhotos = element.nbPreviousPhotos,
+                                    fetched = true
                                 )
                             } else {
                                 element
@@ -74,26 +75,36 @@ class WallsViewModel: ViewModel() {
         }
     }
 
-    fun check(id: UUID, state: ElementStateEnum){
-        //TODO: Check the element with the given id when the backend's endpoint is ready
 
-        _walls.update { current ->
-            current.copy(
-                elements = current.elements.map { element ->
-                    if (element.id == id) {
-                        element.copy(state = state, checked = true)
-                    } else {
-                        element
+    fun check(elementId: UUID, state: ElementStateEnum, inventoryId: UUID) {
+            viewModelScope.launch {
+                val result = RetrofitHelper.inventoryService.postSameElementStep(
+                    inventoryId,
+                    elementId
+                )
+
+                if (result.isSuccessful) {
+                    _walls.update { current ->
+                        current.copy(
+                            elements = current.elements.map { element ->
+                                if (element.id == elementId) {
+                                    element.copy(state = state, checked = true)
+                                } else {
+                                    element
+                                }
+                            }
+                        )
                     }
+                } else {
+                    Log.e("RequestError", "Error adding same step")
                 }
-            )
-        }
+            }
     }
 
-    fun checkAll() {
+    fun checkAll(inventoryId: UUID) {
         _walls.value.elements.forEach { element ->
             if (!element.checked) {
-                check(element.id, element.state) // We apply the previous state as the new one
+                check(element.id, element.state, inventoryId) // We apply the previous state as the new one
             }
         }
     }
