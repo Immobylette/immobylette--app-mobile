@@ -5,6 +5,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -21,7 +23,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -66,12 +67,14 @@ fun Element(
     ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Scaffold(
-        containerColor = Color.White,
+    Column(
+        verticalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
             .width(700.dp)
             .animateContentSize()
-            .height(if (expanded) 480.dp else 120.dp)
+            .heightIn(100.dp, 500.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(Color.White)
             .clickable {
                 if (!error and !checked){
                     expanded = !expanded
@@ -79,28 +82,6 @@ fun Element(
                 }
 
             }
-            .clip(RoundedCornerShape(10.dp)),
-        bottomBar = {
-            if (expanded){
-                Row (modifier = Modifier.fillMaxWidth()){
-                    Button(
-                        text = stringResource(id = R.string.label_button_same_state),
-                        onClick = {
-                            expanded = false
-                            onClickSameState()
-                        },
-                        modifier = Modifier.width(200.dp)
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                    Button(
-                        text = stringResource(id = R.string.label_button_new_state),
-                        onClick = onClickNewState,
-                        isOnLeftSide = false,
-                        modifier = Modifier.width(200.dp)
-                    )
-                }
-            }
-        }
     ) {
         if (error || checked) {
             Box(
@@ -112,7 +93,7 @@ fun Element(
         }
         Column(
             modifier = Modifier
-                .padding(10.dp)
+                .padding(20.dp)
                 .fillMaxWidth()
         ) {
             Row(
@@ -171,25 +152,47 @@ fun Element(
             }
 
             Box(
-                modifier = Modifier
-                    .height(if (expanded) 480.dp else 0.dp)
+                modifier = if (!expanded) Modifier.height(0.dp) else Modifier
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp)
                 ) {
                     Spacer(modifier = Modifier.height(10.dp))
-                    ElementPhotos(
-                        title = stringResource(id = R.string.label_base_photos),
-                        photos = basePhotos,
-                        onClickPhoto = onClickPhoto
-                    )
-                    Spacer(modifier = Modifier.height(10.dp))
-                    ElementPhotos(
-                        title = stringResource(id = R.string.label_previous_photos),
-                        photos = previousPhotos,
-                        onClickPhoto = onClickPhoto
-                    )
+                    if (basePhotos.isNotEmpty()){
+                        ElementPhotos(
+                            title = stringResource(id = R.string.label_base_photos),
+                            photos = basePhotos,
+                            onClickPhoto = onClickPhoto
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
+                    if (previousPhotos.isNotEmpty()){
+                        ElementPhotos(
+                            title = stringResource(id = R.string.label_previous_photos),
+                            photos = previousPhotos,
+                            onClickPhoto = onClickPhoto
+                        )
+                    }
                 }
+            }
+        }
+        if (expanded){
+            Row (modifier = Modifier.fillMaxWidth()){
+                Button(
+                    text = stringResource(id = R.string.label_button_same_state),
+                    onClick = {
+                        expanded = false
+                        onClickSameState()
+                    },
+                    modifier = Modifier.width(200.dp)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Button(
+                    text = stringResource(id = R.string.label_button_new_state),
+                    onClick = onClickNewState,
+                    isOnLeftSide = false,
+                    modifier = Modifier.width(200.dp)
+                )
             }
         }
     }
