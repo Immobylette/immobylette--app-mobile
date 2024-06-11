@@ -16,7 +16,7 @@ const val signatureAgentRoute = "signature-agent"
 
 const val signatureTenantRoute = "signature-tenant"
 
-fun NavGraphBuilder.signatureAgentNavigation(
+fun NavGraphBuilder.signatureNavigation(
     currentSignatureViewModel: CurrentSignatureViewModel,
     currentAgentViewModel: CurrentAgentViewModel,
     currentPropertyViewModel: CurrentPropertyViewModel,

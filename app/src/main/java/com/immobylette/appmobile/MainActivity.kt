@@ -41,7 +41,7 @@ import com.immobylette.appmobile.room.elements.navigateToWalls
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
-import com.immobylette.appmobile.signature.signatureAgentNavigation
+import com.immobylette.appmobile.signature.signatureNavigation
 import com.immobylette.appmobile.signature.current.CurrentSignatureViewModel
 import com.immobylette.appmobile.signature.navigateToTenantSignature
 import com.immobylette.appmobile.step.current.CurrentStepViewModel
@@ -144,7 +144,7 @@ class MainActivity : ComponentActivity() {
                         navigateToElements = navController::navigateToElements
                     )
 
-                    signatureAgentNavigation(
+                    signatureNavigation(
                         currentSignatureViewModel = currentSignatureViewModel,
                         currentAgentViewModel = currentAgentViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
