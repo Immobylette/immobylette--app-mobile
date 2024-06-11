@@ -26,7 +26,7 @@ fun NavGraphBuilder.confirmationNavigation(
                     onNavigateToConfirmed()
                 } else {
                     val propertyId = currentPropertyViewModel.getId()
-                    val agentId = currentAgentViewModel.currentAgent.value
+                    val agentId = currentAgentViewModel.currentAgent.value.id
                     confirmationViewModel.startInventory(propertyId, agentId) {
                         currentInventoryViewModel.changeCurrentInventory(it)
                         onNavigateToConfirmed()

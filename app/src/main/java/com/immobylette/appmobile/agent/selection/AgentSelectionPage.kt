@@ -22,14 +22,13 @@ import com.immobylette.appmobile.ui.shared.component.Agent
 import com.immobylette.appmobile.ui.shared.component.GraphicFooter
 import com.immobylette.appmobile.ui.shared.component.Logo
 import com.immobylette.appmobile.ui.shared.component.Title
-import java.util.UUID
 import kotlin.math.ceil
 
 @Composable
 fun AgentSelectionPage(
     state: AgentListState,
     fetchAgentList: () -> Unit,
-    setCurrentAgent: (agent: UUID) -> Unit,
+    setCurrentAgent: (agent: AgentState) -> Unit,
     onNavigateToAgentSelected:() -> Unit
 ) {
     val halfNbAgents: Int = ceil(state.agentList.size.toDouble()/2).toInt()
@@ -70,7 +69,7 @@ fun AgentSelectionPage(
 @Composable
 fun AgentRow(
     agentList: List<AgentState>,
-    setCurrentAgent: (UUID) -> Unit,
+    setCurrentAgent: (AgentState) -> Unit,
     onNavigateToAgentSelected: () -> Unit
 ) {
     val agentListHeight = 250
@@ -88,7 +87,7 @@ fun AgentRow(
                 name = agent.name,
                 modifier = Modifier.padding(30.dp).width(150.dp).height(agentListHeight.dp),
                 onClick = {
-                    setCurrentAgent(agent.id)
+                    setCurrentAgent(agent)
                     onNavigateToAgentSelected()
                 }
             )

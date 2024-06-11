@@ -21,6 +21,7 @@ import com.immobylette.appmobile.ending.endingNavigation
 import com.immobylette.appmobile.element.newstep.NewStepViewModel
 import com.immobylette.appmobile.element.newstep.navigateToNewStep
 import com.immobylette.appmobile.element.newstep.newStepNavigation
+import com.immobylette.appmobile.ending.navigateToEndingPage
 import com.immobylette.appmobile.loading.loadingNavigation
 import com.immobylette.appmobile.loading.navigateToLoadingPage
 import com.immobylette.appmobile.property.current.CurrentPropertyViewModel
@@ -40,6 +41,9 @@ import com.immobylette.appmobile.room.elements.navigateToWalls
 import com.immobylette.appmobile.room.gotoroom.GoToRoomViewModel
 import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
+import com.immobylette.appmobile.signature.signatureNavigation
+import com.immobylette.appmobile.signature.current.CurrentSignatureViewModel
+import com.immobylette.appmobile.signature.navigateToTenantSignature
 import com.immobylette.appmobile.step.current.CurrentStepViewModel
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import com.immobylette.appmobile.utils.LocationHelper
@@ -51,6 +55,7 @@ class MainActivity : ComponentActivity() {
     private val currentStepViewModel by viewModels<CurrentStepViewModel>()
     private val currentElementViewModel by viewModels<CurrentElementViewModel>()
     private val currentRoomViewModel by viewModels<CurrentRoomViewModel>()
+    private val currentSignatureViewModel by viewModels<CurrentSignatureViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -139,13 +144,21 @@ class MainActivity : ComponentActivity() {
                         navigateToElements = navController::navigateToElements
                     )
 
+                    signatureNavigation(
+                        currentSignatureViewModel = currentSignatureViewModel,
+                        currentAgentViewModel = currentAgentViewModel,
+                        currentPropertyViewModel = currentPropertyViewModel,
+                        onNavigateToSignatureTenant = navController::navigateToTenantSignature,
+                        onNavigateToEndingPage = navController::navigateToEndingPage
+                    )
+
                     inventorySummaryNavigation(
                         currentInventoryViewModel = currentInventoryViewModel,
                         inventorySummaryViewModel = inventorySummaryViewModel,
                         onNavigateToPropertySelection = navController::navigateToPropertySelection,
                         onNavigateToSignature = {}
                     )
-                    
+
                     endingNavigation(
                         onNavigateToWaitingFinished = navController::navigateToPropertySelection
                     )

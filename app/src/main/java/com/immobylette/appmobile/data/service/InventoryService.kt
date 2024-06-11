@@ -3,6 +3,7 @@ package com.immobylette.appmobile.data.service
 import com.immobylette.appmobile.data.dto.AgentDto
 import com.immobylette.appmobile.data.dto.ElementDto
 import com.immobylette.appmobile.data.dto.ElementSummaryDto
+import com.immobylette.appmobile.data.dto.SignatureDto
 import com.immobylette.appmobile.data.dto.InventorySummaryDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -47,5 +48,12 @@ interface InventoryService {
     suspend fun postSameElementStep(
         @Path("inventoryId") inventoryId: UUID,
         @Path("elementId") elementId: UUID
+    ): Response<Unit>
+
+
+    @POST("inventories/{inventoryId}/sign")
+    suspend fun sign(
+        @Path("inventoryId") inventoryId: UUID,
+        @Body type: SignatureDto
     ): Response<Unit>
 }

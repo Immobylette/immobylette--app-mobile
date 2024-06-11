@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.immobylette.appmobile.R
+import com.immobylette.appmobile.data.dto.ThirdPartyDto
 import com.immobylette.appmobile.ui.shared.component.Button
 import com.immobylette.appmobile.ui.shared.component.QuitAppPopup
 import com.immobylette.appmobile.ui.shared.component.Title
@@ -39,7 +40,7 @@ import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 fun ConfirmationPage(
     onNavigateToConfirmed: () -> Unit,
     onNavigateToPropertySelection: () -> Unit,
-    getTenant: () -> String?
+    getTenant: () -> ThirdPartyDto?
 ) {
     val currentTenant = getTenant()
     val buttonWidth = 200.dp
@@ -94,7 +95,9 @@ fun ConfirmationPage(
                         Row {
                             Text(text = stringResource(id = R.string.label_denomination))
                             Spacer(modifier = Modifier.width(20.dp))
-                            Text(text = currentTenant ?: "")
+                            if (currentTenant != null) {
+                                Text(text = currentTenant.name)
+                            }
                         }
                         Spacer(modifier = Modifier.height(50.dp))
                         Text(text = stringResource(id = R.string.label_confirmation_message))
@@ -118,7 +121,7 @@ fun ConfirmationPage(
 @Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun ConfirmationPagePreview(){
-    val currentTenant = "John Doe"
+    val currentTenant = ThirdPartyDto(name = "John Doe")
 
     ImmobyletteappmobileTheme {
 
