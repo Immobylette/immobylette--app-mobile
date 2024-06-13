@@ -44,6 +44,8 @@ suspend fun ImageCapture.takePicture(executor: Executor): File {
             outputOptions, executor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    val fileSize = photoFile.length()
+                    Log.i("TakePicture", "Image saved with size: $fileSize bytes")
                     continuation.resume(photoFile)
                 }
 
