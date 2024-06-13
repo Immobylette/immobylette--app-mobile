@@ -141,7 +141,9 @@ fun ElementsPage(
                     Spacer(modifier = Modifier.height(30.dp))
 
                     LazyColumn(
-                        modifier = Modifier.fillMaxHeight()
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .padding(bottom = 75.dp)
                     ) {
                         items(elements.elements) {element ->
                             Element(
