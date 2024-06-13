@@ -165,9 +165,12 @@ fun ElementsPage(
                                 },
                                 onExpanded = {
                                     // Fetch element if not already fetched
+
                                     if (!element.fetched)
                                         fetchElement(element.id)
-                                }
+                                },
+                                nbBasePhotos = element.nbBasePhotos,
+                                nbPreviousPhotos = element.nbPreviousPhotos
                             )
                             Spacer(modifier = Modifier.height(15.dp))
                         }

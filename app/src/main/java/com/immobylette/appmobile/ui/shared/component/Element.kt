@@ -56,7 +56,9 @@ fun Element(
     description: String,
     state: ElementState,
     basePhotos: List<PhotoUrlDto>,
+    nbBasePhotos: Int,
     previousPhotos: List<PhotoUrlDto>,
+    nbPreviousPhotos: Int,
     checked: Boolean,
     error: Boolean,
     onClickNewState: () -> Unit,
@@ -145,9 +147,9 @@ fun Element(
                         .width(200.dp)
                         .padding(10.dp),
                 ) {
-                    LabelNbPhotos(label = stringResource(id = R.string.label_base_photos).lowercase(), nbPhotos = basePhotos.size)
+                    LabelNbPhotos(label = stringResource(id = R.string.label_base_photos).lowercase(), nbPhotos = nbBasePhotos)
                     Spacer(modifier = Modifier.weight(1f))
-                    LabelNbPhotos(label = stringResource(id = R.string.label_previous_photos).lowercase(), nbPhotos = previousPhotos.size)
+                    LabelNbPhotos(label = stringResource(id = R.string.label_previous_photos).lowercase(), nbPhotos = nbPreviousPhotos)
                 }
             }
 
@@ -282,7 +284,9 @@ fun ElementPreview() {
             onClickNewState = {},
             onClickSameState = {},
             onClickPhoto = {},
-            onExpanded = {}
+            onExpanded = {},
+            nbBasePhotos = 2,
+            nbPreviousPhotos = 1
         )
     }
 }
