@@ -1,6 +1,7 @@
 package com.immobylette.appmobile.element.camera
 
 import android.Manifest
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.view.ViewGroup
 import android.widget.Toast
@@ -51,6 +52,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.data.model.Photo
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.ui.shared.component.PhotoDescription
 import com.immobylette.appmobile.ui.shared.custommodifier.coloredShadow
 import com.immobylette.appmobile.ui.shared.theme.BlueLight
@@ -81,6 +83,10 @@ fun CameraPage(
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
     var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
+
+    val toastTitle = stringResource(id = R.string.toast_title_success)
+    val toastPictureAddedMessage = stringResource(id = R.string.toast_message_picture_added)
+
     val imageCaptureUseCase by remember {
         mutableStateOf(
             ImageCapture.Builder()
@@ -187,6 +193,13 @@ fun CameraPage(
                 onNextClick = {
                     photo.description = it
                     addPhoto(photo)
+                    displayModal = false
+                    ToastService.showToast(
+                        activity =  context as Activity,
+                        title = toastTitle,
+                        message = toastPictureAddedMessage,
+                        type = ToastService.successStyle
+                    )
                     navigateToElementState()
                 },
             )
