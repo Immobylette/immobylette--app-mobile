@@ -81,7 +81,6 @@ fun CameraPage(
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
     var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
-
     val imageCaptureUseCase by remember {
         mutableStateOf(
             ImageCapture.Builder()
