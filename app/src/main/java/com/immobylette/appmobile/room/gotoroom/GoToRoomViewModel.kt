@@ -3,6 +3,7 @@ package com.immobylette.appmobile.room.gotoroom
 import android.util.Log
 import  androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.utils.RetrofitHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +29,7 @@ class GoToRoomViewModel : ViewModel() {
                 val room = result.body()!!.toState()
                 _state.update { room.copy() }
             } else{
+                ToastService.showToastError()
                 Log.e("RequestError", "Error fetching current room")
             }
         }

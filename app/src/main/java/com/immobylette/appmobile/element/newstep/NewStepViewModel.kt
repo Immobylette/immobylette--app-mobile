@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.immobylette.appmobile.step.StepState
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.utils.RetrofitHelper
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -34,6 +35,7 @@ class NewStepViewModel: ViewModel() {
             if (result.isSuccessful) {
                 onStepAdded()
             } else {
+                ToastService.showToastError()
                 Log.e("RequestError", "Error adding step")
             }
         }

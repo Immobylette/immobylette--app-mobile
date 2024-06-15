@@ -76,8 +76,9 @@ fun ElementsPage(
     var displayModalConfirmCheckAll by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
-    val toastTitle = stringResource(id = R.string.toast_title_success)
+    val toastSuccessTitle = stringResource(id = R.string.toast_title_success)
     val toastSameStateMessage = stringResource(id = R.string.toast_message_element_same_state)
+
 
     LaunchedEffect(Unit) {
         fetchElements()
@@ -168,7 +169,7 @@ fun ElementsPage(
                                 onClickSameState = {
                                     ToastService.showToast(
                                         activity = context as Activity,
-                                        title = toastTitle,
+                                        title = toastSuccessTitle,
                                         message = toastSameStateMessage,
                                         type = ToastService.successStyle
                                     )
@@ -283,7 +284,7 @@ fun Confirm(
 @Composable
 @Preview
 fun ConfirmPreview(){
-    ImmobyletteappmobileTheme {
+    ImmobyletteappmobileTheme{
         Confirm(
             onCancelClicked = {},
             onConfirmClicked = {}
