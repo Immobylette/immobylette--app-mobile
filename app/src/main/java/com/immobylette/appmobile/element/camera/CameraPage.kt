@@ -2,7 +2,6 @@ package com.immobylette.appmobile.element.camera
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.util.Size
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -10,12 +9,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY
-import androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
 import androidx.camera.core.Preview
 import androidx.camera.core.UseCase
-import androidx.camera.core.resolutionselector.AspectRatioStrategy
-import androidx.camera.core.resolutionselector.ResolutionSelector
-import androidx.camera.core.resolutionselector.ResolutionStrategy
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
@@ -87,16 +82,10 @@ fun CameraPage(
     val coroutineScope = rememberCoroutineScope()
     var previewUseCase by remember { mutableStateOf<UseCase>(Preview.Builder().build()) }
 
-    val resolutionSelector = ResolutionSelector.Builder()
-        .setResolutionStrategy(ResolutionStrategy(Size(1920, 1080), ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER))
-        .build()
-
     val imageCaptureUseCase by remember {
         mutableStateOf(
             ImageCapture.Builder()
                 .setCaptureMode(CAPTURE_MODE_MAXIMIZE_QUALITY)
-//                .setCaptureMode(CAPTURE_MODE_MINIMIZE_LATENCY)
-//                .setResolutionSelector(resolutionSelector)
                 .build()
         )
     }
