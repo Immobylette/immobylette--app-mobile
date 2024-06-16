@@ -61,10 +61,10 @@
     <string name="label_summary_nb_photos">Nb de photos prises</string>
     <string name="label_summary_date">Date</string>
     <string name="label_inventory_summary_title">Résumé de l\'état des lieux</string>
-    <string name="toast_title_success">Succés</string>
-    <string name="toast_message_picture_added">Photo ajouté !</string>
+    <string name="toast_title_success">Succès</string>
+    <string name="toast_message_picture_added">Photo ajoutée !</string>
     <string name="toast_message_picture_deleted">Photo supprimée !</string>
     <string name="toast_message_element_same_state">Etat de l\'élément gardé !</string>
-    <string name="toast_message_error_declared">Erreur déclaré !</string>
+    <string name="toast_message_error_declared">Erreur déclarée !</string>
 
 </resources>

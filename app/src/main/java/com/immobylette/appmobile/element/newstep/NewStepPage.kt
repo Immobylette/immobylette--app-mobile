@@ -90,7 +90,7 @@ fun NewStepPage(
     var displayModalError by remember { mutableStateOf(false) }
 
     val toastTitle = stringResource(id = R.string.toast_title_success)
-    val toastPhotoAddedMessage = stringResource(id = R.string.toast_message_picture_deleted)
+    val toastPhotoDeletedMessage = stringResource(id = R.string.toast_message_picture_deleted)
     val toastErrorDeclared = stringResource(id = R.string.toast_message_error_declared)
 
     Surface(
@@ -242,7 +242,7 @@ fun NewStepPage(
                             ToastService.showToast(
                                 activity = context as Activity,
                                 title = toastTitle,
-                                message = toastPhotoAddedMessage,
+                                message = toastPhotoDeletedMessage,
                                 type = ToastService.successStyle
                             )
                             onClickDeletePhoto(it)
