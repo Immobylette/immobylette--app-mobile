@@ -3,6 +3,7 @@ package com.immobylette.appmobile.toasts
 import android.app.Activity
 import androidx.core.content.res.ResourcesCompat
 import com.immobylette.appmobile.R
+import com.immobylette.appmobile.ui.shared.theme.Typography
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 
@@ -29,7 +30,7 @@ object ToastService {
             type,
             MotionToast.GRAVITY_TOP,
             MotionToast.LONG_DURATION,
-            ResourcesCompat.getFont(activity, R.font.helvetica_regular)
+            ResourcesCompat.getFont(activity, R.font.roboto_regular),
         )
     }
 }

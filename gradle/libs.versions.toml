@@ -21,11 +21,13 @@ cameraCore = "1.3.3"
 cameraView = "1.3.3"
 cameraLifecycle = "1.3.3"
 cameraCamera2 = "1.3.3"
+motionToast = "master"
 
 [libraries]
 
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+motionToast = { module = "com.github.wordemo:MotionToast", version.ref = "motionToast" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
