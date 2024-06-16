@@ -5,7 +5,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,6 +21,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -69,14 +68,14 @@ fun Element(
     ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Column(
-        verticalArrangement = Arrangement.SpaceBetween,
+    val expandedHeight = if(previousPhotos.isNotEmpty()) 480.dp else 320.dp
+
+    Scaffold(
+        containerColor = Color.White,
         modifier = modifier
             .width(700.dp)
             .animateContentSize()
-            .heightIn(100.dp, 500.dp)
-            .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
+            .height(if (expanded) expandedHeight else 100.dp)
             .clickable {
                 if (!error and !checked){
                     expanded = !expanded
@@ -84,6 +83,28 @@ fun Element(
                 }
 
             }
+            .clip(RoundedCornerShape(10.dp)),
+        bottomBar = {
+            if (expanded){
+                Row (modifier = Modifier.fillMaxWidth()){
+                    Button(
+                        text = stringResource(id = R.string.label_button_same_state),
+                        onClick = {
+                            expanded = false
+                            onClickSameState()
+                        },
+                        modifier = Modifier.width(200.dp)
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    Button(
+                        text = stringResource(id = R.string.label_button_new_state),
+                        onClick = onClickNewState,
+                        isOnLeftSide = false,
+                        modifier = Modifier.width(200.dp)
+                    )
+                }
+            }
+        }
     ) {
         if (error || checked) {
             Box(
@@ -95,7 +116,7 @@ fun Element(
         }
         Column(
             modifier = Modifier
-                .padding(20.dp)
+                .padding(10.dp)
                 .fillMaxWidth()
         ) {
             Row(
@@ -154,7 +175,8 @@ fun Element(
             }
 
             Box(
-                modifier = if (!expanded) Modifier.height(0.dp) else Modifier
+                modifier = Modifier
+                    .height(if (expanded) 480.dp else 0.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(10.dp)
@@ -178,26 +200,8 @@ fun Element(
                 }
             }
         }
-        if (expanded){
-            Row (modifier = Modifier.fillMaxWidth()){
-                Button(
-                    text = stringResource(id = R.string.label_button_same_state),
-                    onClick = {
-                        expanded = false
-                        onClickSameState()
-                    },
-                    modifier = Modifier.width(200.dp)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    text = stringResource(id = R.string.label_button_new_state),
-                    onClick = onClickNewState,
-                    isOnLeftSide = false,
-                    modifier = Modifier.width(200.dp)
-                )
-            }
-        }
     }
+
 }
 
 @Composable
