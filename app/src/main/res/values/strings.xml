@@ -62,6 +62,7 @@
     <string name="label_summary_date">Date</string>
     <string name="label_inventory_summary_title">Résumé de l\'état des lieux</string>
     <string name="toast_title_success">Succès</string>
+    <string name="toast_title_error">Erreur</string>
     <string name="toast_message_picture_added">Photo ajoutée !</string>
     <string name="toast_message_picture_deleted">Photo supprimée !</string>
     <string name="toast_message_element_same_state">Etat de l\'élément gardé !</string>
