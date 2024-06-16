@@ -33,12 +33,13 @@ fun NavGraphBuilder.newStepNavigation(
             onClickCancel = {
                 if (currentStepViewModel.getStep().isWall) navigateToWalls() else navigateToElements()
             },
-            onClickCheckElement = {
+            onClickCheckElement =  { loadingFinished ->
                 val currentInventoryId = currentInventoryViewModel.getCurrentInventory()
                 val currentElementId = currentElementViewModel.getId()
                 val currentStep = currentStepViewModel.getStep()
 
                 newStepViewModel.addStep(currentInventoryId, currentElementId, currentStep) {
+                    loadingFinished()
                     if (currentStep.isWall) navigateToWalls() else navigateToElements()
                 }
             }

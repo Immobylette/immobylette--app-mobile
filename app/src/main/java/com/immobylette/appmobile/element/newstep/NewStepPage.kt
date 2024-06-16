@@ -5,11 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,6 +25,7 @@ import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,14 +41,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.core.net.toUri
 import coil.compose.rememberAsyncImagePainter
 import com.immobylette.appmobile.R
@@ -71,7 +78,7 @@ fun NewStepPage(
     onClickDeletePhoto: (Int) -> Unit,
     onClickAddPhoto: () -> Unit,
     onClickCancel: () -> Unit,
-    onClickCheckElement: () -> Unit
+    onClickCheckElement: (() -> Unit) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -82,6 +89,26 @@ fun NewStepPage(
     var description by remember { mutableStateOf("") }
     var errorDescription by remember { mutableStateOf("") }
     var displayModalError by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
+
+    if (isLoading){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .zIndex(1f)
+                .pointerInput(Unit) {
+                    detectTapGestures()
+                },
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            CircularProgressIndicator(
+                modifier = Modifier.width(64.dp),
+                color = MaterialTheme.colorScheme.primary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
+        }
+    }
 
     Surface(
         modifier = Modifier
@@ -90,6 +117,7 @@ fun NewStepPage(
                 interactionSource = interactionSource,
                 indication = null
             ) { focusManager.clearFocus() }
+            .blur(if (isLoading) 10.dp else 0.dp)
     ) {
         Scaffold(
             bottomBar = {
@@ -112,7 +140,10 @@ fun NewStepPage(
                         text = stringResource(id = R.string.label_button_check),
                         style = MaterialTheme.typography.titleMedium,
                     ) {
-                        onClickCheckElement()
+                        isLoading = true
+                        onClickCheckElement {
+                            isLoading = false
+                        }
                     }
                 }
             }
