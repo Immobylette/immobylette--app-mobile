@@ -66,5 +66,5 @@
     <string name="toast_message_picture_deleted">Photo supprimée !</string>
     <string name="toast_message_element_same_state">Etat de l\'élément gardé !</string>
     <string name="toast_message_error_declared">Erreur déclarée !</string>
-
+    <string name="toast_message_error_data">Erreur survenue avec le serveur !</string>
 </resources>
