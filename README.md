@@ -2,7 +2,7 @@
 
 ## Contexte du projet
 
-Ce repository s'inscrit dans le cadre du projet Immobylette qui vise à réaliser une application mobile android de réalisation d'état des lieux. Cette application métier doit pouvoir être utilisé par une agence immobilière.
+Ce repository s'inscrit dans le cadre du projet Immobylette qui vise à réaliser une application mobile android de réalisation d'état des lieux. Cette application métier doit pouvoir être utilisée par une agence immobilière.
 
 ## Architecture
 
@@ -52,7 +52,7 @@ val agentService: AgentService = retrofitClient.create(AgentService::class.java)
 
 ### Data Transfer Objects des réponses de l'api
 
-Nous allons définir pour chacune des réponses de l'api, le DTO qui lui est associée en créer des data class exemple : 
+Nous allons définir pour chacune des réponses de l'api, le DTO qui lui est associé en créer des data class exemple : 
 
 ```kotlin
 data class ElementDto(
@@ -79,7 +79,7 @@ Toutes les pages disponibles via la navigation sont disponibles dans le fichier 
 
 ### Pages
 
-Les pages de l'application sont la réplique de la maquette figma réalisée. Au sein des pages sont utilisés des composants (parties du code réutillisables). Les composables des pages ont été réalisées de telle sorte qu'elles ne réalisent pas elles-mêmes des appels au ViewModel auxquelles elles sont associées : elles prennent en paramètre des callbacks responsable des actions à réaliser. Ainsi la logique est déportée plus haut, les pages ne sont responsables que de l'affichage
+Les pages de l'application sont la réplique de la maquette figma réalisée. Au sein des pages sont utilisés des composants (parties du code réutillisables). Les composables des pages ont été réalisées de telle sorte qu'elles ne réalisent pas elles-mêmes des appels au ViewModel auxquelles elles sont associées : elles prennent en paramètre des callbacks responsables des actions à réaliser. Ainsi la logique est déportée plus haut, les pages ne sont responsables que de l'affichage
 
 ### ViewModels
 
