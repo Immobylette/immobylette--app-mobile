@@ -3,6 +3,7 @@ package com.immobylette.appmobile.property.selection
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.utils.LocationHelper
 import com.immobylette.appmobile.utils.RetrofitHelper
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,6 +44,7 @@ class PropertySelectionViewModel: ViewModel() {
                     )
                 }
             }else{
+                ToastService.showToastError()
                 Log.e("RequestError", "Error fetching properties")
             }
         }
@@ -78,6 +80,7 @@ class PropertySelectionViewModel: ViewModel() {
                     )
                 }
             }else{
+                ToastService.showToastError()
                 Log.e("RequestError", "Error fetching property")
             }
         }
