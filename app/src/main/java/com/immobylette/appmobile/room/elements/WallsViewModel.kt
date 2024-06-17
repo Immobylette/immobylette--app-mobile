@@ -3,6 +3,7 @@ package com.immobylette.appmobile.room.elements
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.utils.RetrofitHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,6 +33,7 @@ class WallsViewModel: ViewModel() {
                     current.copy(elements = walls.elements)
                 }
             }else {
+                ToastService.showToastError();
                 Log.e("RequestError", "Error fetching walls")
             }
         }
@@ -70,6 +72,7 @@ class WallsViewModel: ViewModel() {
                     )
                 }
             }else {
+                ToastService.showToastError();
                 Log.e("RequestError", "Error fetching wall")
             }
         }
@@ -96,6 +99,7 @@ class WallsViewModel: ViewModel() {
                         )
                     }
                 } else {
+                    ToastService.showToastError();
                     Log.e("RequestError", "Error adding same step")
                 }
             }

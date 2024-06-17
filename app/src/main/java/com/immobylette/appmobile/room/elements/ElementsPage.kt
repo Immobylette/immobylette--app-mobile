@@ -1,6 +1,7 @@
 package com.immobylette.appmobile.room.elements
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,11 +30,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.data.dto.PhotoUrlDto
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.ui.shared.component.Button
 import com.immobylette.appmobile.ui.shared.component.Chip
 import com.immobylette.appmobile.ui.shared.component.ChipRoomInfo
@@ -71,6 +74,11 @@ fun ElementsPage(
     var displayModalQuitApp by remember { mutableStateOf(false) }
     var displayModalCurrentPhoto by remember { mutableStateOf(false) }
     var displayModalConfirmCheckAll by remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val toastSuccessTitle = stringResource(id = R.string.toast_title_success)
+    val toastSameStateMessage = stringResource(id = R.string.toast_message_element_same_state)
+
 
     LaunchedEffect(Unit) {
         fetchElements()
@@ -160,7 +168,15 @@ fun ElementsPage(
                                     resetStep(element.state)
                                     onNavigateToTakePicture()
                                 },
-                                onClickSameState = { onClickSameState(element) },
+                                onClickSameState = {
+                                    ToastService.showToast(
+                                        activity = context as Activity,
+                                        title = toastSuccessTitle,
+                                        message = toastSameStateMessage,
+                                        type = ToastService.successStyle
+                                    )
+                                    onClickSameState(element)
+                                },
                                 onClickPhoto = { photo ->
                                     currentPhoto = photo
                                     displayModalCurrentPhoto = true
@@ -270,7 +286,7 @@ fun Confirm(
 @Composable
 @Preview
 fun ConfirmPreview(){
-    ImmobyletteappmobileTheme {
+    ImmobyletteappmobileTheme{
         Confirm(
             onCancelClicked = {},
             onConfirmClicked = {}

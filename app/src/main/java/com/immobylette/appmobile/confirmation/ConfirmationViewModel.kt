@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.immobylette.appmobile.data.dto.AgentDto
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.utils.RetrofitHelper
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -14,6 +15,7 @@ class ConfirmationViewModel: ViewModel() {
             val agentDto = AgentDto(agentId)
             val result = RetrofitHelper.inventoryService.startInventory(propertyId, agentDto)
             if (!result.isSuccessful) {
+                ToastService.showToastError()
                 Log.e("RequestError", "Error starting inventory")
             }
             onInventoryStarted(result.body()!!)

@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.accompanist.permissions)
     implementation(libs.retrofit)
     implementation(libs.gson)
+    implementation(libs.motionToast)
     implementation(libs.converter.gson)
     implementation(libs.coil.compose)
     implementation(libs.androidx.ui.text.google.fonts)

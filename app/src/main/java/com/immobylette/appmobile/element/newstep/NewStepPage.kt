@@ -1,6 +1,7 @@
 package com.immobylette.appmobile.element.newstep
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -47,6 +48,7 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -58,6 +60,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.immobylette.appmobile.R
 import com.immobylette.appmobile.data.enum.ElementState
 import com.immobylette.appmobile.data.model.Photo
+import com.immobylette.appmobile.toasts.ToastService
 import com.immobylette.appmobile.ui.shared.component.Slider
 import com.immobylette.appmobile.ui.shared.theme.Black
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
@@ -80,6 +83,9 @@ fun NewStepPage(
     onClickCancel: () -> Unit,
     onClickCheckElement: (() -> Unit) -> Unit
 ) {
+
+    val context = LocalContext.current
+
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -109,6 +115,10 @@ fun NewStepPage(
             )
         }
     }
+
+    val toastTitle = stringResource(id = R.string.toast_title_success)
+    val toastPhotoAddedMessage = stringResource(id = R.string.toast_message_picture_deleted)
+    val toastErrorDeclared = stringResource(id = R.string.toast_message_error_declared)
 
     Surface(
         modifier = Modifier
@@ -260,6 +270,12 @@ fun NewStepPage(
                     ListAdditionalPhotos(
                         photos = photos,
                         onDeletePhoto = {
+                            ToastService.showToast(
+                                activity = context as Activity,
+                                title = toastTitle,
+                                message = toastPhotoAddedMessage,
+                                type = ToastService.successStyle
+                            )
                             onClickDeletePhoto(it)
                             photos = getStepPhotos() as SnapshotStateList<Photo>
                         },
@@ -279,6 +295,12 @@ fun NewStepPage(
                     elementTitle = getElementName(),
                     onCancelClicked = { displayModalError = false },
                     onConfirmClicked = {
+                        ToastService.showToast(
+                            activity = context as Activity,
+                            title = toastTitle,
+                            message = toastErrorDeclared,
+                            type = ToastService.successStyle
+                        )
                         displayModalError = false
                         errorDescription = it
                         changeErrorDescription(it)
