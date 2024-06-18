@@ -168,10 +168,12 @@ fun CameraPage(
                         .padding(30.dp)
                         .align(Alignment.BottomEnd),
                     onClick = {
-                        coroutineScope.launch {
-                            imageCaptureUseCase.takePicture(context.executor).let {
-                                photo.file = it
-                                displayModal = true
+                        if (!displayModal){
+                            displayModal = true
+                            coroutineScope.launch {
+                                imageCaptureUseCase.takePicture(context.executor).let {
+                                    photo.file = it
+                                }
                             }
                         }
                     }
