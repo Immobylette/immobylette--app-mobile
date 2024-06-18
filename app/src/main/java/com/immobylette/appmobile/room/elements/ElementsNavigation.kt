@@ -69,7 +69,7 @@ fun NavGraphBuilder.elementsNavigation(
             resetStep = { state -> currentStepViewModel.resetStepWithStateAndIsWall(state, false) },
             onClickOnNext = {
                 elementsViewModel.checkAll(currentInventoryViewModel.getCurrentInventory())
-                if (currentRoomViewModel.getOrderNb() + 1 == currentPropertyViewModel.getNbRooms()) {
+                if (currentRoomViewModel.getOrderNb() == currentPropertyViewModel.getNbRooms()) {
                     onNavigateToInventorySummary()
                 } else {
                     onNavigateToCurrentRoom()
