@@ -138,9 +138,11 @@ class MainActivity : ComponentActivity() {
                     newStepNavigation(
                         newStepViewModel = newStepViewModel,
                         currentElementViewModel = currentElementViewModel,
+                        elementsViewModel = elementsViewModel,
                         currentStepViewModel = currentStepViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         navigateToTakeAnotherPicture = navController::navigateToTakeAnotherPicture,
+                        navigateGoToRoom = navController::navigateToGoToRoom,
                         navigateToWalls = navController::navigateToWalls,
                         navigateToElements = navController::navigateToElements
                     )
