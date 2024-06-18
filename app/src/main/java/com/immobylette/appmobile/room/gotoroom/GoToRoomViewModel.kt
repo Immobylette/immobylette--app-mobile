@@ -21,7 +21,7 @@ class GoToRoomViewModel : ViewModel() {
             return _state.asStateFlow()
         }
 
-    fun fetchCurrentRoom(id: UUID) {
+    fun fetchCurrentRoom(id: UUID, errorCallback: () -> Unit) {
         viewModelScope.launch {
             val result = RetrofitHelper.roomService.getCurrentRoom(id)
 
@@ -29,8 +29,12 @@ class GoToRoomViewModel : ViewModel() {
                 val room = result.body()!!.toState()
                 _state.update { room.copy() }
             } else{
-                ToastService.showToastError()
-                Log.e("RequestError", "Error fetching current room")
+                if(result.code() == 409) {
+                    errorCallback()
+                } else {
+                    ToastService.showToastError()
+                    Log.e("RequestError", "Error fetching current room")
+                }
             }
         }
     }
