@@ -31,7 +31,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.immobylette.appmobile.R
@@ -41,24 +40,24 @@ import com.immobylette.appmobile.ui.shared.component.QuitAppPopup
 import com.immobylette.appmobile.ui.shared.component.Tip
 import com.immobylette.appmobile.ui.shared.component.Title
 import com.immobylette.appmobile.ui.shared.theme.Blue
-import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
 import java.util.UUID
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun GoToRoomPage(
     state: RoomState,
-    fetchCurrentRoom: (id: UUID) -> Unit,
+    fetchCurrentRoom: (id: UUID, errorCallback: () -> Unit) -> Unit,
     setCurrentRoom: (room: RoomState) -> Unit,
     getCurrentInventory: () -> UUID,
     onNavigateToRoomElements:() -> Unit,
-    onNavigateToPropertySelection: () -> Unit
+    onNavigateToPropertySelection: () -> Unit,
+    onNavigateToInventorySummary: () -> Unit
 ) {
     var displayModalQuitApp by remember { mutableStateOf(false) }
     setCurrentRoom(state)
 
     LaunchedEffect(Unit) {
-        fetchCurrentRoom(getCurrentInventory())
+        fetchCurrentRoom(getCurrentInventory(), onNavigateToInventorySummary)
     }
 
     Column(
@@ -203,31 +202,6 @@ fun BlueRectangleWithText(
         Text(
             text = text,
             color = Color.White
-        )
-    }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun GoToRoomPagePreview(){
-    ImmobyletteappmobileTheme {
-        GoToRoomPage(
-            state = RoomState(
-                id = UUID.randomUUID(),
-                name = "Salon",
-                description = "Salon de 20m²",
-                roomType = "Salon",
-                allocation = "Salon",
-                nbWalls = 4,
-                nbDoors = 1,
-                nbWindows = 2,
-                reference = "Salon"
-            ),
-            fetchCurrentRoom = {},
-            setCurrentRoom = {},
-            getCurrentInventory = { UUID.randomUUID() },
-            onNavigateToRoomElements = {},
-            onNavigateToPropertySelection = {}
         )
     }
 }

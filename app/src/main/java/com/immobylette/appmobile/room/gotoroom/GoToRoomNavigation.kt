@@ -15,7 +15,8 @@ fun NavGraphBuilder.goToRoomNavigation(
     currentRoomViewModel: CurrentRoomViewModel,
     currentInventoryViewModel: CurrentInventoryViewModel,
     onNavigateToRoomElements: () -> Unit,
-    onNavigateToPropertySelection: () -> Unit
+    onNavigateToPropertySelection: () -> Unit,
+    onNavigateToInventorySummary: () -> Unit
 ) {
     composable(goToRoomRoute) {
         val state: RoomState by goToRoomViewModel.state.collectAsStateWithLifecycle()
@@ -26,7 +27,8 @@ fun NavGraphBuilder.goToRoomNavigation(
             setCurrentRoom = currentRoomViewModel::setCurrentRoom,
             getCurrentInventory = currentInventoryViewModel::getCurrentInventory,
             onNavigateToRoomElements = onNavigateToRoomElements,
-            onNavigateToPropertySelection = onNavigateToPropertySelection
+            onNavigateToPropertySelection = onNavigateToPropertySelection,
+            onNavigateToInventorySummary = onNavigateToInventorySummary
         )
     }
 }

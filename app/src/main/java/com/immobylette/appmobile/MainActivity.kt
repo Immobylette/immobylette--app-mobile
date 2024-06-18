@@ -109,7 +109,8 @@ class MainActivity : ComponentActivity() {
                         currentRoomViewModel = currentRoomViewModel,
                         currentInventoryViewModel = currentInventoryViewModel,
                         onNavigateToRoomElements = navController::navigateToWalls,
-                        onNavigateToPropertySelection = navController::navigateToPropertySelection
+                        onNavigateToPropertySelection = navController::navigateToPropertySelection,
+                        onNavigateToInventorySummary = navController::navigateToInventorySummary
                     )
 
                     elementsNavigation(

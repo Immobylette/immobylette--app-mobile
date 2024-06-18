@@ -41,7 +41,7 @@ interface InventoryService {
         @Part photos: List<MultipartBody.Part>,
     ): Response<Unit>
 
-    @GET("/inventories/{id}/summary")
+    @GET("inventories/{id}/summary")
     suspend fun getSummary(@Path("id") id: UUID): Response<InventorySummaryDto>
 
     @POST("inventories/{inventoryId}/elements/{elementId}/same")
