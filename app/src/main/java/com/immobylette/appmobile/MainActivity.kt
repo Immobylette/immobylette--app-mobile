@@ -43,6 +43,7 @@ import com.immobylette.appmobile.room.gotoroom.goToRoomNavigation
 import com.immobylette.appmobile.room.gotoroom.navigateToGoToRoom
 import com.immobylette.appmobile.signature.signatureNavigation
 import com.immobylette.appmobile.signature.current.CurrentSignatureViewModel
+import com.immobylette.appmobile.signature.navigateToAgentSignature
 import com.immobylette.appmobile.signature.navigateToTenantSignature
 import com.immobylette.appmobile.step.current.CurrentStepViewModel
 import com.immobylette.appmobile.ui.shared.theme.ImmobyletteappmobileTheme
@@ -159,7 +160,7 @@ class MainActivity : ComponentActivity() {
                         currentInventoryViewModel = currentInventoryViewModel,
                         inventorySummaryViewModel = inventorySummaryViewModel,
                         onNavigateToPropertySelection = navController::navigateToPropertySelection,
-                        onNavigateToSignature = {}
+                        onNavigateToSignature = navController::navigateToAgentSignature
                     )
 
                     endingNavigation(
