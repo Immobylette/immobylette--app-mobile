@@ -153,6 +153,7 @@ class MainActivity : ComponentActivity() {
                         currentAgentViewModel = currentAgentViewModel,
                         currentPropertyViewModel = currentPropertyViewModel,
                         onNavigateToSignatureTenant = navController::navigateToTenantSignature,
+                        currentInventoryViewModel = currentInventoryViewModel,
                         onNavigateToEndingPage = navController::navigateToEndingPage
                     )
 
